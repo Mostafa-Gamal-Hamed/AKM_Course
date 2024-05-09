@@ -53,7 +53,7 @@ class FinancialAccountsController extends Controller
     public function storeTutor(Request $request)
     {
         $request->validate([
-            "tutor" => "required|string|alpha|min:3|exists:tutors,name",
+            "tutor" => "required|string|min:3|exists:tutors,name",
             "tutorYearMonth" => "required|date",
             "tutorWeek" => "required|integer|between:1,4",
             "days" => "required|integer|between:1,7",

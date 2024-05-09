@@ -11,7 +11,8 @@ class ManagerController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('type')->get();
+        $users = User::orderByRaw("FIELD(type, 'admin') DESC")
+        ->orderBy('id','ASC')->get();
         return view("admin.manager.managers", compact("users"));
     }
 
