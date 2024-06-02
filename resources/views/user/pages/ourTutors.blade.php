@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('Title')
-    AKM Tutors
+    AKM {{__("messages.Our Tutors")}}
 @endsection
 
 <style>
@@ -59,25 +59,14 @@
 
 @section('Body')
     {{-- Header --}}
-    <h1 class="header text-center"><span class="text-danger">Meet</span> Our Tutors</h1>
-
-    {{-- Special tutors --}}
-    <div id="fh5co-explore" class="fh5co-bg-section mb-5" style="background-color: #03144f;">
-        <div class="container">
-            <div class="text-center text-light">
-                <h4 class="fw-bold text-light">Not just anyone can become an AKM Tutor</h4>
-                <hr class="first m-auto">
-                <p class="w-50 m-auto">We match our students with the right tutor based on their learning needs and objectives.</p>
-            </div>
-        </div>
-    </div>
+    <h1 class="header text-center"><span class="text-danger">{{__("messages.Meet")}}</span> {{__("messages.Our Tutors")}}</h1>
 
     {{-- Our tutors --}}
     <div class="container bg-light shadow p-3 mb-5">
-        <div class="mb-5">
-            <h2 class="text-center fw-bold"><span class="text-danger">Our</span> tutors</h2>
+        {{-- <div class="mb-5">
+            <h2 class="text-center fw-bold"><span class="text-danger">{{__("messages.Our Tutors")}}</span></h2>
             <hr style="width: 10%; height: 3px; background:#fb3b80; margin:auto;">
-        </div>
+        </div> --}}
 
         <div class="flexColumn d-flex justify-content-between align-items-center">
             <div class="tutor column rounded-circle mb-5">
@@ -87,7 +76,7 @@
                 </div>
                 <div class="text-center">
                     <h6>Mona ahmed</h6>
-                    <p>9+ years of teaching English</p>
+                    <p>9+ {{__("messages.years of teaching English")}}</p>
                 </div>
             </div>
             <div class="tutor column rounded-circle mb-5">
@@ -97,7 +86,7 @@
                 </div>
                 <div class="text-center">
                     <h6>Ahmed Mohamed</h6>
-                    <p>12+ years of teaching English</p>
+                    <p>12+ {{__("messages.years of teaching English")}}</p>
                 </div>
             </div>
             <div class="tutor column rounded-circle mb-5">
@@ -107,7 +96,7 @@
                 </div>
                 <div class="text-center">
                     <h6>Mostafa ibrahem</h6>
-                    <p>7+ years of teaching English</p>
+                    <p>7+ {{__("messages.years of teaching English")}}</p>
                 </div>
             </div>
             <div class="tutor column rounded-circle mb-5">
@@ -117,35 +106,43 @@
                 </div>
                 <div class="text-center">
                     <h6>Marim ali</h6>
-                    <p>5+ years of teaching English</p>
+                    <p>5+ {{__("messages.years of teaching English")}}</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Special tutors --}}
+    <div id="fh5co-explore" class="fh5co-bg-section mb-5" style="background-color: #03144f;">
+        <div class="container">
+            <div class="text-center text-light">
+                <h4 class="fw-bold text-light">{{__("messages.Not just anyone can become an AKM Tutor")}}</h4>
+                <hr class="first m-auto">
+                <p class="w-50 m-auto">{{__("messages.We match our students with the right tutor based on their learning needs and objectives.")}}</p>
             </div>
         </div>
     </div>
 
     {{-- Tutors FAQ --}}
     <div class="english m-5 p-2 bg-light shadow">
-        <h4 class="text-center m-auto p-3"><span class="text-danger">Tutors</span> <span class="fw-bold">FAQ</span></h4>
+        <h4 class="text-center m-auto p-3"><span class="text-danger">{{__("messages.Tutors")}}</span> <span class="fw-bold">{{__("messages.FAQ")}}</span></h4>
         <div class="container text-center">
             <div class="learn">
-                <h5 class="head">How do we select our tutors?</h5>
+                <h5 class="head">{{__("messages.How do we select our tutors?")}}</h5>
                 <p class="desc">
-                    At AKM, we carefully select our tutors based on their academic qualifications, teaching experience, and passion for education.
-                    Our tutors are experienced educators, and subject matter experts with a track record of helping students achieve academic success.
+                    {{__("messages.At AKM, we carefully select our tutors based on their academic qualifications, teaching experience, and passion for education. Our tutors are experienced educators, and subject matter experts with a track record of helping students achieve academic success.")}}
                 </p>
             </div>
             <div class="learn">
-                <h5 class="head2">How do I know that your tutors are qualified to teach?</h5>
+                <h5 class="head2">{{__("messages.How do I know that your tutors are qualified to teach?")}}</h5>
                 <p class="desc2">
-                    At Ostaz, we conduct rigorous background checks and interviews to ensure that our tutors meet our standards for quality and professionalism.
-                    We also require our tutors to hold relevant academic degrees and teaching certifications, and we regularly evaluate their performance to ensure that they continue to meet our standards.
+                    {{__("messages.At AKM, we conduct rigorous background checks and interviews to ensure that our tutors meet our standards for quality and professionalism. We also require our tutors to hold relevant academic degrees and teaching certifications, and we regularly evaluate their performance to ensure that they continue to meet our standards.")}}
                 </p>
             </div>
             <div class="learn">
-                <h5 class="head3">What if I'm not satisfied with my tutoring experience?</h5>
+                <h5 class="head3">{{__("messages.What if I'm not satisfied with my tutoring experience?")}}</h5>
                 <p class="desc3">
-                    At Ostaz, we are committed to providing our students with a positive and effective learning experience. If you are not satisfied with your tutoring experience for any reason,
-                    please let us know and we will do our best to resolve the issue. We also offer a satisfaction guarantee, which means that if you are not satisfied with your learning experience, we will refund your money.
+                    {{__("messages.At AKM, we are committed to providing our students with a positive and effective learning experience. If you are not satisfied with your tutoring experience for any reason, please let us know and we will do our best to resolve the issue. We also offer a satisfaction guarantee, which means that if you are not satisfied with your learning experience, we will refund your money.")}}
                 </p>
             </div>
         </div>

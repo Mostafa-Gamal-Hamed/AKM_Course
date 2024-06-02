@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ __('messages.lang') }}" dir="{{ __('messages.dir') }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="AKM language course to Learn English with an online course for kids and adult">
-    <meta name="keywords" content="AKM, Course, Language, English, Kids, Adult, Online, Online Course, English Tutor, Tutor, Teacher">
+    <meta name="keywords"
+        content="AKM, Course, Language, English, Kids, Adult, Online, Online Course, English Tutor, Tutor, Teacher">
     <meta name="author" content="Mustafa Gamal">
     <meta name="language" content="English">
     <title>@yield('Title')</title>
@@ -32,6 +33,17 @@
     <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/modernizr-2.6.2.min.js') }}"></script>
+    {{-- Demo class --}}
+    <script>
+        $(document).ready(function() {
+            let interval = 500;
+            for (let i = 1; i <= 10; i++) {
+                setTimeout(function() {
+                    $('#demo_a').toggle();
+                }, interval * i);
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -40,3 +52,4 @@
     <div class="fh5co-loader"></div>
 
     <div id="page">
+        

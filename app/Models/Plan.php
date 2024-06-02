@@ -5,16 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Level extends Model
+class Plan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "level","book"
+        "name","comment","price","offerPrice","month","sessions","type"
     ];
-
-    // Relationships
-    public function students()
-    {
-        $this->hasMany(Student::class);
-    }
 }

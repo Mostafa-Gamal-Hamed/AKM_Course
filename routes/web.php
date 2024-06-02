@@ -2,24 +2,39 @@
 
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DemoClassController;
 use App\Http\Controllers\FinancialAccountsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\User\pagesController;
 use App\Http\Controllers\User\userController;
+use App\Models\Level;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\App;
 
 
 ///// Home
 Route::get('/', function () {
     return view('user.home');
-});
+})->middleware("guest");
 Route::get("home", [HomeController::class, "home"]);
+
+
+///// Language
+Route::get('lang/{lang}', function (string $lang) {
+    if ($lang == "ar") {
+        session()->put("lang","ar");
+    }else{
+        session()->put("lang","en");
+    }
+    return redirect()->back();
+});
 
 
 ///// Profile
@@ -34,10 +49,18 @@ Route::middleware('auth')->group(function () {
 Route::controller(DashboardController::class)->group(function() {
     // Show dashboard
     Route::get('/dashboard','dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+
+    // Tutor
     // All classes
     Route::get('allClasses','allClasses')->middleware(['auth', 'verified'])->name('allClasses');
     // Add classes
     Route::post("addClass/{email}","store")->middleware(['auth', 'verified'])->name("addClass");
+
+    // Student
+    Route::get("viewBook/{id}",function($id) {
+        $book = Level::findOrFail($id);
+        return view("viewBook",compact("book"));
+    })->middleware(['auth', 'verified'])->name("viewBook");
 
     Route::middleware("isAdmin")->group(function() {
         // All classes
@@ -105,6 +128,21 @@ Route::middleware("isAdmin")->group(function() {
         Route::post("admin/storeFinancialTutor", "storeTutor")->name("storeFinancialTutor");
     });
 
+    // Demo class
+    Route::controller(DemoClassController::class)->group(function() {
+        // All classes
+        Route::get("demoClasses","index")->name("demoClasses");
+        // Edit page
+        Route::get("classDetails/{id}","edit")->name("classDetails");
+        // Update class
+        Route::put("updateClass/{id}","update")->name("updateClass");
+        // Change status
+        Route::put("changeStatus/{id}","changeStatus")->name("changeStatus");
+        // Delete
+        Route::delete("deleteClass/{id}","destroy")->name("deleteClass");
+
+    });
+
     //  Curriculums
     Route::controller(CurriculumController::class)->group(function () {
         // All curriculums
@@ -119,6 +157,22 @@ Route::middleware("isAdmin")->group(function() {
         Route::put("admin/updateCurriculum/{id}", "update")->name("updateCurriculum");
         // Delete curriculum
         Route::delete("admin/deleteCurriculum/{id}", "destroy")->name("deleteCurriculum");
+    });
+
+    // Plans and Pricing
+    Route::controller(PlanController::class)->group(function() {
+        // All plans
+        Route::get("admin/plans","index")->name("plans");
+        // Show plan
+        Route::get("admin/showPlan/{id}","show")->name("showPlan");
+        // Add plan page
+        Route::get("admin/addPlan","create")->name("addPlan");
+        // Add plan
+        Route::Post("admin/storePlan","store")->name("storePlan");
+        // Update plan
+        Route::put("admin/updatePlan/{id}","update")->name("updatePlan");
+        // Delete plan
+        Route::delete("admin/deletePlan/{id}","destroy")->name("deletePlan");
     });
 
     // Users
@@ -179,18 +233,25 @@ Route::controller(userController::class)->group(function () {
     Route::post("contactUs", "contactUs")->name("contactUs");
     // Become tutor
     Route::post("becomeTutor", "becomeTutor")->name("becomeTutor");
+    // Checkout
+    Route::post("checkout/{id}", "checkout")->name("checkout");
+    // tryForFree
+    Route::get("tryForFree","tryForFree")->name("tryForFree");
+    // Demo class
+    Route::post("demoClass","storeDemoClass")->name("demoClass");
 });
 
 // pages
 Route::controller(pagesController::class)->group(function () {
     Route::get('courses', 'courses');
     Route::get('ourTutors', 'ourTutors');
-    Route::get('blog', 'blog');
-    // Route::get('pricing','pricing');
+    // Route::get('blog', 'blog');
+    Route::get('pricing','pricing');
     Route::get('showBlog/{id}', 'showBlog');
     Route::get('aboutUs', 'aboutUs');
     Route::get('contact', 'contact');
     Route::get('becomeTutor', 'becomeTutor');
+    Route::get('checkout/{id}', 'checkout');
 });
 
 

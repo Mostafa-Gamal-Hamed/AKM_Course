@@ -25,9 +25,15 @@ return new class extends Migration
             $table->date("paymentDate")->nullable();
             $table->date("Paid");
             $table->date("startDate");
-            $table->bigInteger("level");
+            $table->date("endDate");
+            $table->bigInteger("levels");
+            $table->bigInteger("sessions");
+            $table->bigInteger("Attended")->nullable();
+            $table->bigInteger("Absented")->nullable();
+            $table->bigInteger("remainingSessions")->nullable();
             $table->string("image");
             $table->foreignId("country_codes_id")->constrained()->onUpdate("cascade")->onDelete("cascade");
+            $table->foreignId("levels_id")->constrained()->onUpdate("cascade")->onDelete("cascade");
             $table->timestamps();
         });
     }

@@ -10,34 +10,40 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="nav justify-content-end grid gap-2">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ url('courses') }}">Courses</a>
+                    <a class="nav-link text-light" href="{{ url('courses') }}">{{__("messages.Courses")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ url('ourTutors') }}">Our Tutors</a>
+                    <a class="nav-link text-light" href="{{ url('ourTutors') }}">{{__("messages.Our Tutors")}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url('pricing') }}">{{__("messages.Pricing")}}</a>
                 </li>
                 {{-- <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ url('pricing') }}">Pricing</a>
+                    <a class="nav-link text-light" href="{{ url('blog') }}">{{__("messages.Blog")}}</a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ url('blog') }}">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ url('aboutUs') }}">About us</a>
+                    <a class="nav-link text-light" href="{{ url('aboutUs') }}">{{__("messages.About us")}}</a>
                 </li>
                 @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Account
+                            {{__("messages.Account")}}
                         </a>
                         <ul class="dropdown-menu bg-dark text-light">
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="{{ route('dashboard') }}">Dashboard</a>
-                            </li>
+                            @if(session()->get("lang") == "ar")
+                                <li class="nav-item">
+                                    <a class="nav-link text-light text-end" href="{{ route('dashboard') }}">{{__("messages.Dashboard")}}</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="{{ route('dashboard') }}">{{__("messages.Dashboard")}}</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf
-                                    <button class="nav-link text-light">Logout</button>
+                                    <button class="nav-link text-light">{{__("messages.Logout")}}</button>
                                 </form>
                             </li>
                         </ul>
@@ -45,11 +51,20 @@
                 @endauth
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link text-light" href="{{ route('login') }}">{{__('messages.Login')}}</a>
                     </li>
                 @endguest
+                @if (session()->get("lang") == "ar")
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url('lang/en') }}"><i class="fa-solid fa-globe"></i> <span>{{__("messages.English")}}</span></a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url('lang/ar') }}"><i class="fa-solid fa-globe"></i> <span>{{__("messages.Arabic")}}</span></a>
+                    </li>
+                @endif
                 <li class="nav-item btn-cta">
-                    <a class="nav-link" href="{{ url('contact') }}"><span>Contact us</span></a>
+                    <a class="nav-link" href="{{ url('contact') }}"><span>{{__("messages.Contact us")}}</span></a>
                 </li>
             </ul>
         </div>
@@ -57,3 +72,4 @@
 </nav>
 {{-- SweetAlert --}}
 @include('sweetalert::alert')
+

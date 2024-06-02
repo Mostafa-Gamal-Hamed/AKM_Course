@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('Title')
-    About AKM
+    {{__("messages.About us")}}
 @endsection
 
 <style>
@@ -55,9 +55,9 @@
     <div id="fh5co-explore" class="fh5co-bg-section shadow-lg mb-5" style="background-color: #03144f;">
         <div class="container">
             <div class="text-center text-light">
-                <h4 class="fw-bold text-light">We are on a mission to develop well-rounded students and prepare all generations for a better future.</h4>
+                <h4 class="fw-bold text-light">{{__("messages.We are on a mission to develop well-rounded students and prepare all generations for a better future.")}}</h4>
                 <hr class="first m-auto">
-                <p class="w-50 m-auto">We help you gain confidence and improve your speaking, pronunciation and vocabulary.</p>
+                <p class="w-50 m-auto">{{__("messages.We help you gain confidence and improve your speaking, pronunciation and vocabulary.")}}</p>
             </div>
         </div>
     </div>
@@ -66,11 +66,9 @@
     <div class="container shadow bg-light mb-5 rounded">
         <div class="aboutUs flexColumn d-flex justify-content-center align-items-center p-3">
             <div class="col-6 column">
-                <h3 class="fw-bold">About AKM Language Courses</h3>
+                <h3 class="fw-bold">{{__("messages.About AKM Language Courses")}}</h3>
                 <h5>
-                    AKM Language Courses is a leading provider of comprehensive language learning solutions
-                    designed to empower individuals with the skills and confidence to communicate effectively in diverse linguistic environments.
-                    Established with a vision to bridge cultural divides and facilitate global communication, AKM Language Courses has been dedicated to delivering high-quality language education since its inception.
+                    {{__("messages.AKM Language Courses is a leading provider of comprehensive language learning solutions designed to empower individuals with the skills and confidence to communicate effectively in diverse linguistic environments. Established with a vision to bridge cultural divides and facilitate global communication, AKM Language Courses has been dedicated to delivering high-quality language education since it's inception.")}}
                 </h5>
             </div>
             <div class="col-6 column text-center">
@@ -83,22 +81,18 @@
                 <img src="{{asset('images/aboutus2.jpg')}}" class="aboutMission img-fluid w-75 rounded" alt="AKM Image">
             </div>
             <div class="col-6 column mb-2">
-                <h3 class="fw-bold">Our Mission</h3>
+                <h3 class="fw-bold">{{__("messages.Our Mission")}}</h3>
                 <h5>
-                    At AKM Language Courses, our mission is to break down language barriers and foster intercultural understanding
-                    through innovative and immersive language learning experiences. We believe that language is not just a means of communication but
-                    a gateway to cultural enrichment and personal growth. Our goal is to equip learners with the linguistic tools they need to navigate the complexities of our interconnected world with ease and fluency.
+                    {{__("messages.At AKM Language Courses, our mission is to break down language barriers and foster intercultural understanding through innovative and immersive language learning experiences. We believe that language is not just a means of communication but a gateway to cultural enrichment and personal growth. Our goal is to equip learners with the linguistic tools they need to navigate the complexities of our interconnected world with ease and fluency.")}}
                 </h5>
             </div>
         </div>
         <hr>
         <div class="aboutUs flexColumn d-flex justify-content-center align-items-center p-3">
             <div class="col-6 column">
-                <h3 class="fw-bold">Comprehensive Language Solutions</h3>
+                <h3 class="fw-bold">{{__("messages.Comprehensive Language Solutions")}}</h3>
                 <h5>
-                    We offer a wide range of language courses tailored to meet the unique needs and preferences of our diverse clientele.
-                    Whether you're a beginner looking to master the basics or an advanced learner striving for proficiency, we have the perfect course for you.
-                    Our experienced instructors employ cutting-edge teaching methodologies and immersive learning techniques to ensure optimal outcomes for our students.
+                    {{__("messages.We offer a wide range of language courses tailored to meet the unique needs and preferences of our diverse clientele. Whether you're a beginner looking to master the basics or an advanced learner striving for proficiency, we have the perfect course for you. Our experienced instructors employ cutting-edge teaching methodologies and immersive learning techniques to ensure optimal outcomes for our students.")}}
                 </h5>
             </div>
             <div class="col-6 column text-center">
@@ -111,30 +105,25 @@
                 <video src="{{asset('images/aboutUs.mp4')}}" loop controls autoplay></video>
             </div>
             <div class="col column">
-                <h3 class="fw-bold">Key Features of AKM Language Courses</h3>
+                <h3 class="fw-bold">{{__("messages.Key Features of AKM Language Courses")}}</h3>
                 <h5>
-                    <b>Flexible Learning Options:</b> We understand that everyone has different schedules and learning styles.
-                    That's why we offer flexible learning options, including in-person classes, online courses, and hybrid learning models, to accommodate our students' needs.
+                    <b>{{__("messages.Flexible Learning Options:")}}</b> {{__("messages.We understand that everyone has different schedules and learning styles. That's why we offer flexible learning options, including in-person classes, online courses, and hybrid learning models, to accommodate our students' needs.")}}
                 </h5>
                 <hr>
                 <h5>
-                    <b>Expert Instructors:</b> Our team of highly qualified instructors are not only native speakers but
-                    also experts in language teaching methodologies. They are dedicated to providing personalized attention and support to help students reach their language learning goals.
+                    <b>{{__("messages.Expert Instructors:")}}</b> {{__("messages.Our team of highly qualified instructors are not only native speakers but also experts in language teaching methodologies. They are dedicated to providing personalized attention and support to help students reach their language learning goals.")}}
                 </h5>
                 <hr>
                 <h5>
-                    <b>Interactive Learning Materials:</b> We believe in making learning engaging and interactive.
-                    Our courses feature a variety of multimedia resources, interactive exercises, and real-world simulations to enhance the learning experience and promote retention.
+                    <b>{{__("messages.Interactive Learning Materials:")}}</b> {{__("messages.We believe in making learning engaging and interactive. Our courses feature a variety of multimedia resources, interactive exercises, and real-world simulations to enhance the learning experience and promote retention.")}}
                 </h5>
                 <hr>
                 <h5>
-                    <b>Progress Tracking:</b> We provide regular assessments and progress tracking tools to monitor each student's
-                    advancement and identify areas for improvement. This allows us to tailor our instruction to meet the individual needs of our students and ensure steady progress.
+                    <b>{{__("messages.Progress Tracking:")}}</b> {{__("messages.We provide regular assessments and progress tracking tools to monitor each student's advancement and identify areas for improvement. This allows us to tailor our instruction to meet the individual needs of our students and ensure steady progress.")}}
                 </h5>
                 <hr>
                 <h5>
-                    <b>Cultural Enrichment:</b> Language learning is not just about grammar and vocabulary; it's also about understanding
-                    and appreciating different cultures. Our courses incorporate cultural elements to provide students with a well-rounded understanding of the language they are learning.
+                    <b>{{__("messages.Cultural Enrichment:")}}</b> {{__("messages.Language learning is not just about grammar and vocabulary; it's also about understanding and appreciating different cultures. Our courses incorporate cultural elements to provide students with a well-rounded understanding of the language they are learning.")}}
                 </h5>
             </div>
         </div>
@@ -142,11 +131,9 @@
         <div class="text-center p-3">
             <img src="{{asset('images/joinUus.png')}}" class="aboutLang img-fluid text-center mb-5 w-50 m-auto" alt="join us">
             <h5>
-                Whether you're looking to learn a new language for travel, business, or personal enrichment,
-                AKM Language Courses is here to help you succeed. Join us today and embark on a journey of linguistic discovery and cultural exploration.
-                Let us help you unlock the world of opportunities that fluency in another language can offer.
+                {{__("messages.Whether you're looking to learn a new language for travel, business, or personal enrichment, AKM Language Courses is here to help you succeed. Join us today and embark on a journey of linguistic discovery and cultural exploration. Let us help you unlock the world of opportunities that fluency in another language can offer.")}}
             </h5>
-            <a href="{{url('contact')}}" class="btn btn-outline-warning btn-lg">Join Us</a>
+            <a href="{{url('contact')}}" class="btn btn-outline-warning btn-lg">{{__("messages.Join Us")}}</a>
         </div>
     </div>
 

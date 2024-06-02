@@ -11,10 +11,10 @@
 }
 /* Scroll */
 ::-webkit-scrollbar{
-    width: .7rem;
+    width: .5rem;
 }
 ::-webkit-scrollbar-track{
-    background-color: white;
+    background-color: transparent;
 }
 ::-webkit-scrollbar-thumb{
     background-color: #0099a8;
@@ -27,6 +27,13 @@ body {
     line-height: 1.7;
     color: #828282;
     background: #e8f6f7;
+}
+/* Pricing */
+#fh5co-pricing .container .owlPricing .animate-box .price-box{
+    transition: 0.5s ease-in-out;
+}
+#fh5co-pricing .container .owlPricing .animate-box .price-box:hover{
+    background-color: #ffffff;
 }
 
 #page {
@@ -138,6 +145,67 @@ ul li:active > a {
     color: #ececec !important;
 }
 
+/* Moving bar */
+.bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+}
+
+.demo{
+    width: 100%;
+    height: 55px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    padding: 10px;
+    z-index: 1;
+    bottom: 40px;
+}
+.demo .demo_class{
+    width: 150px;
+    height: 100%;
+    background-color: green;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease-in-out;
+}
+.demo .demo_class:hover{
+    width: 170px;
+    height: 40px;
+}
+.demo .demo_class a{
+    color: white;
+}
+
+.move-bar {
+    width: 100%;
+    height: 40px;
+    background-color: #0fb7c7c7;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.move-bar span {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 10px;
+    font-size: 18px;
+    animation: moveText 20s linear infinite;
+}
+
+.move-bar span a {
+    color: #f33f3f;
+    margin-left: 3px;
+}
 
 #fh5co-header,
 #fh5co-counter,

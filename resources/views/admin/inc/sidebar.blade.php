@@ -62,6 +62,26 @@
     <hr class="sidebar-divider" />
 
     <!-- Heading -->
+    <div class="sidebar-heading">Plans and Pricing</div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('plans') }}">
+            <i class="fas fa-map text-info"></i>
+            <span>Plans & Pricing</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('addPlan') }}">
+            <i class="fas fa-plus text-warning"></i>
+            <span>Add Plan</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider" />
+
+    <!-- Heading -->
     <div class="sidebar-heading">Managers</div>
 
     <li class="nav-item">
@@ -122,6 +142,14 @@
         <a class="nav-link" href="{{ route('addStudent') }}">
             <i class="fas fa-plus text-warning"></i>
             <span>Add Student</span>
+        </a>
+    </li>
+
+    {{-- Classes --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('demoClasses') }}">
+            <i class="fas fa-school text-info"></i>
+            <span>Demo class</span>
         </a>
     </li>
 

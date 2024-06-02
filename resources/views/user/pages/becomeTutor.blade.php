@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('Title')
-    AKM Become Tutor
+    Become Tutor
 @endsection
 
 <style>

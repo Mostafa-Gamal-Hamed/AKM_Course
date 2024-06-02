@@ -23,8 +23,11 @@ class CurriculumController extends Controller
             "book"  =>"required|file|mimes:pdf,doc,docx,xlsx",
         ]);
 
+        // Original name
+        $originalName = $data['book']->getClientOriginalName();
+
         // Storage file
-        $data['book'] = Storage::putFile("books",$data['book']);
+        $data['book'] = $data['book']->storeAs("books", $originalName);
 
         Level::create($data);
         return redirect()->back()->with("success","Added Successfully");
