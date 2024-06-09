@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\Student;
 use App\Models\Tutor;
 use App\Models\TutorClasses;
@@ -15,9 +16,11 @@ class DashboardController extends Controller
     // Tutor side
     public function dashboard()
     {
-        $user = Auth::user();
+        $user    = Auth::user();
         $student = Student::where("email",$user->email)->first();
-        return view('dashboard', compact('user','student'));
+        $level   = $student->levels_level;
+        $book    = Level::where("level",$level)->first();
+        return view('dashboard', compact('user','student','book'));
     }
 
     public function store(Request $request, string $email)

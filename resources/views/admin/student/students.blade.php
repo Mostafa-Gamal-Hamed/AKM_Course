@@ -21,7 +21,7 @@
                                 <th>Number</th>
                                 <th>Email</th>
                                 <th>Start date</th>
-                                <th>Level</th>
+                                <th>Levels</th>
                                 <th>City</th>
                                 <th colspan="2">Action</th>
                             </tr>
@@ -37,7 +37,7 @@
                                     <td>{{ $student->phone }}</td>
                                     <td>{{ $student->email }}</td>
                                     <td>{{ $student->startDate }}</td>
-                                    <td>{{ $student->level }}</td>
+                                    <td>{{ $student->levels }}</td>
                                     <td>{{ $student->city }}</td>
                                     <td>
                                         <a href="{{ route('studentDetails', "$student->id") }}"

@@ -17,6 +17,10 @@
     .left:hover {
         font-size: 25px;
     }
+
+    .showPricing {
+        background-color: white;
+    }
 </style>
 
 @section('Body')
@@ -24,36 +28,33 @@
     <h1 class="header text-center">{{__("messages.checkout")}}</h1>
     <div class="container">
         <div class="row flexColumn justify-content-between">
-            <div class=" col-4 column text-center mb-5">
-                <div class="left price-box shadow bg-light">
-                    <h2>Your Plan</h2>
-                    {{-- Name & Comment --}}
-                    <h2 class="pricing-plan fw-bolder text-primary">
-                        {{ __("messages.$plan->name") }}
+            <div class="col-4 column text-center mb-5">
+                <div class="shadow border p-3 text-center rounded mb-4 column showPricing">
+                    <h2 class="fw-bold">{{__("messages.Your Plan")}}</h2>
+                    <div>
+                        {{-- Name --}}
+                        <h4 class="fw-bold">{{ __("messages.$plan->name") }}</h4>
+                        {{-- Comment --}}
                         @if ($plan->comment != null)
-                            <span class="fw-bolder text-danger">{{ __("messages.$plan->comment") }}</span>
+                            <p class="text-info">{{ __("messages.$plan->comment") }}</p>
                         @endif
-                    </h2>
-                    {{-- Price & OfferPrice --}}
-                    @if ($plan->offerPrice != null)
-                        <p><del>$ {{ $plan->price }}</del></p>
-                        <div class="price">
-                            <sup class="currency">$</sup>{{ $plan->offerPrice }}
-                        </div>
-                    @else
-                        <div class="price">
-                            <sup class="currency">$</sup>{{ $plan->price }}
-                        </div>
-                    @endif
-                    {{-- Month --}}
-                    <div class="m-2">
-                        <small>{{ $plan->month }}/{{ __('messages.month') }}</small>
+                        {{-- Price & OfferPrice --}}
+                        @if ($plan->offerPrice != null)
+                            <h5 class="text-danger">EGP <del>{{ $plan->price }}</del></h5>
+                            <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
+                        @else
+                            <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
+                        @endif
+                        {{-- Month --}}
+                        <h5 class="bg-secondary text-light p-2">{{ $plan->month }}/{{ __('messages.month') }}
+                        </h5>
+                        {{-- Type --}}
+                        <p class="p-2" style="background-color: rgb(230 230 230);">
+                            {{ __("messages.$plan->type") }}</p>
+                        {{-- Session --}}
+                        <p class="bg-warning text-dark p-2">{{ $plan->sessions }}
+                            {{ __('messages.sessions') }}</p>
                     </div>
-                    {{-- Type & Sessions --}}
-                    <ul class="classes">
-                        <li class="text-light bg-secondary mb-2 rounded">{{ __("messages.$plan->type") }}</li>
-                        <li class="text-light bg-warning rounded">{{ $plan->sessions }} {{ __('messages.sessions') }}</li>
-                    </ul>
                 </div>
             </div>
             <div class="col-8 column text-center">

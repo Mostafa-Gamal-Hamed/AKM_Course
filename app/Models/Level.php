@@ -11,10 +11,4 @@ class Level extends Model
     protected $fillable = [
         "level","book"
     ];
-
-    // Relationships
-    public function students()
-    {
-        $this->hasMany(Student::class);
-    }
 }

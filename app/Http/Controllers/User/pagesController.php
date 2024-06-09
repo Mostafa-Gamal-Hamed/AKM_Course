@@ -20,8 +20,13 @@ class pagesController extends Controller
 
     public function pricing()
     {
+        return view('user.pages.pricing');
+    }
+
+    public function pricingDetails()
+    {
         $plans = Plan::all();
-        return view('user.pages.pricing',compact('plans'));
+        return view('user.pages.pricingDetails',compact('plans'));
     }
 
     public function blog()

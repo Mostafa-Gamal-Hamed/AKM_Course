@@ -73,6 +73,17 @@ AKM {{__("messages.Our Courses")}}
         <img src="{{asset('images/header2.jpg')}}" height="100%" width="100%"  alt="Courses">
     </header>
 
+    {{-- Our expert language --}}
+    <div id="fh5co-explore" class="fh5co-bg-section shadow-lg mt-5" style="background-color: #03144f;">
+        <div class="container">
+            <div class="text-center text-light">
+                <h4 class="fw-bold text-light">{{__("messages.Our expert language tutors will help you improve and become more confident in English.")}}</h4>
+                <hr class="m-auto">
+                <p class="w-50 m-auto">{{__("messages.Learn ESL, get better at your job, or get help with your studies and exams. Our tutors cover reading, writing, grammar, vocabulary, and much more.")}}</p>
+            </div>
+        </div>
+    </div>
+
     {{-- Service --}}
     <div id="fh5co-explore" class="fh5co-bg-section mt-5 mb-5">
         <div class="container bg-light shadow">
@@ -96,54 +107,18 @@ AKM {{__("messages.Our Courses")}}
         </div>
     </div>
 
-    {{-- Our expert language --}}
-    <div id="fh5co-explore" class="fh5co-bg-section shadow-lg" style="background-color: #03144f;">
-        <div class="container">
-            <div class="text-center text-light">
-                <h4 class="fw-bold text-light">{{__("messages.Our expert language tutors will help you improve and become more confident in English.")}}</h4>
-                <hr class="m-auto">
-                <p class="w-50 m-auto">{{__("messages.Learn ESL, get better at your job, or get help with your studies and exams. Our tutors cover reading, writing, grammar, vocabulary, and much more.")}}</p>
-            </div>
-        </div>
-    </div>
-
-    {{-- Why english --}}
-    <div class="english shadow bg-light m-5 p-2">
-        <h4 class="text-center m-auto p-3"><span class="text-danger">{{__("messages.English")}}</span> <span class="fw-bold">{{__("messages.FAQ")}}</span></h4>
-        <div class="container text-center">
-            <div class="learn">
-                <h5 class="head">{{__("messages.Why learn english?")}}</h5>
-                <p class="desc">
-                    {{__("messages.One of the most prominent languages in the world, English is considered to be the language of international communication, the media and the internet. You need well-spoken and well-written English not only to better conduct your business, increase work opportunities but also for socializing and entertainment.")}}
-                </p>
-            </div>
-            <div class="learn">
-                <h5 class="head2">{{__("messages.Who will be my English tutor?")}}</h5>
-                <p class="desc2">
-                    {{__("messages.We handpick only the elite English tutors for our students. We are adamant about selecting tutors who are native speakers and have academic credentials in the field of teaching English as a second language; it is also worth mentioning that experience is a cornerstone in the recruitment process of all our tutors.")}}
-                </p>
-            </div>
-            <div class="learn">
-                <h5 class="head3">{{__("messages.How can AKM English tutor help my child?")}}</h5>
-                <p class="desc3">
-                    {{__("messages.Our tutoring program and great roster of qualified and friendly tutors mean that each lesson is tailored to the needs and goals of your child. Our tutors create the best conditions for learning, developing language and understanding. Courses are fully engaging, usually conversation based while teaching grammar, vocabulary and pronunciation skills through a preset context. This approach encourages students to practice speaking English independently as well as gain self-confidence and the skills they need.")}}
-                </p>
-            </div>
-        </div>
-    </div>
-
     {{-- With you --}}
-    <div id="fh5co-explore" class="fh5co-bg-section shadow-lg" style="background-color: #03144f;">
+    {{-- <div id="fh5co-explore" class="fh5co-bg-section shadow-lg" style="background-color: #03144f;">
         <div class="container">
             <div class="text-center text-light">
                 <h4 class="fw-bold text-light">{{__("messages.We are with you step by step until you become a fluently in english.")}}</h4>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- What you learn --}}
     <div id="fh5co-explore" class="fh5co-bg-section mt-5 mb-5">
-        <div class="owl-carousel shadow bg-light">
+        <div class="owl-carousel shadow bg-light p-3">
             <div class="owl-item">
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="col-md-7 col-sm-12">
@@ -194,6 +169,31 @@ AKM {{__("messages.Our Courses")}}
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Why english --}}
+    <div class="english shadow bg-light m-5 p-2">
+        <h4 class="text-center m-auto p-3"><span class="text-danger">{{__("messages.English")}}</span> <span class="fw-bold">{{__("messages.FAQ")}}</span></h4>
+        <div class="container text-center">
+            <div class="learn">
+                <h5 class="head">{{__("messages.Why learn english?")}}</h5>
+                <p class="desc">
+                    {{__("messages.One of the most prominent languages in the world, English is considered to be the language of international communication, the media and the internet. You need well-spoken and well-written English not only to better conduct your business, increase work opportunities but also for socializing and entertainment.")}}
+                </p>
+            </div>
+            <div class="learn">
+                <h5 class="head2">{{__("messages.Who will be my English tutor?")}}</h5>
+                <p class="desc2">
+                    {{__("messages.We handpick only the elite English tutors for our students. We are adamant about selecting tutors who are native speakers and have academic credentials in the field of teaching English as a second language; it is also worth mentioning that experience is a cornerstone in the recruitment process of all our tutors.")}}
+                </p>
+            </div>
+            <div class="learn">
+                <h5 class="head3">{{__("messages.How can AKM English tutor help my child?")}}</h5>
+                <p class="desc3">
+                    {{__("messages.Our tutoring program and great roster of qualified and friendly tutors mean that each lesson is tailored to the needs and goals of your child. Our tutors create the best conditions for learning, developing language and understanding. Courses are fully engaging, usually conversation based while teaching grammar, vocabulary and pronunciation skills through a preset context. This approach encourages students to practice speaking English independently as well as gain self-confidence and the skills they need.")}}
+                </p>
             </div>
         </div>
     </div>

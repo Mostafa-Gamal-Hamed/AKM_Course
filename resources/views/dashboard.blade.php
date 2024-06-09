@@ -144,12 +144,12 @@
                                 </h2>
                                 <div class="rounded fs-5 p-1 fw-bold">
                                     <p>{{ __('messages.Book') }} :
-                                        <span class="text-primary">{{ Str::after($student->level->book, 'books/') }}</span>
+                                        <span class="text-primary">{{ Str::after($book->book, 'books/') }}</span>
                                     </p>
                                     <div class="d-flex">
 
                                         <p>{{ __('messages.View book') }} : <a
-                                                href="{{ route('viewBook', "{$student->level->id}") }}"
+                                                href="{{ route('viewBook', "{$book->id}") }}"
                                                 target="_blank">{{ __('messages.click') }}</a></p>
                                     </div>
                                 </div>

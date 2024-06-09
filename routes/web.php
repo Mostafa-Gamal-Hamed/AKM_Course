@@ -227,7 +227,7 @@ Route::middleware("isAdmin")->group(function() {
 
 ///// Users
 
-// Tutor
+// User
 Route::controller(userController::class)->group(function () {
     // Find tutor
     Route::post("contactUs", "contactUs")->name("contactUs");
@@ -241,12 +241,13 @@ Route::controller(userController::class)->group(function () {
     Route::post("demoClass","storeDemoClass")->name("demoClass");
 });
 
-// pages
+// User pages
 Route::controller(pagesController::class)->group(function () {
     Route::get('courses', 'courses');
     Route::get('ourTutors', 'ourTutors');
     // Route::get('blog', 'blog');
     Route::get('pricing','pricing');
+    Route::get('pricingDetails','pricingDetails');
     Route::get('showBlog/{id}', 'showBlog');
     Route::get('aboutUs', 'aboutUs');
     Route::get('contact', 'contact');

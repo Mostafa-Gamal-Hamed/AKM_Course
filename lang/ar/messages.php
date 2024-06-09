@@ -103,6 +103,17 @@ return [
     "At AKM, we are committed to providing our students with a positive and effective learning experience. If you are not satisfied with your tutoring experience for any reason, please let us know and we will do our best to resolve the issue. We also offer a satisfaction guarantee, which means that if you are not satisfied with your learning experience, we will refund your money."=>"في AKM، نحن ملتزمون بتزويد طلابنا بتجربة تعليمية إيجابية وفعالة. إذا لم تكن راضيًا عن تجربتك التعليمية لأي سبب من الأسباب، فيرجى إخبارنا وسنبذل قصارى جهدنا لحل المشكلة. نحن نقدم أيضًا ضمان الرضا، مما يعني أنه إذا لم تكن راضيًا عن تجربة التعلم الخاصة بك، فسنقوم برد أموالك.",
 
     // Pricing page
+    "Languages"=>"اللغات",
+    "Open"=>"مفتوح",
+    "Soon"=>"قريبا",
+    "English Courses"=>"دورات انجليزى",
+    "French Courses"=>"دورات فرنساوى",
+    "German Courses"=>"دورات المانى",
+    "Italy Courses"=>"دورات ايطالى",
+    "Chinese Courses"=>"دورات صينى",
+
+    // PricingDetails page
+    "Pricing Details"=>"تفاصيل العرض",
     "Plans and Pricing"=>"الخطط و الاسعار",
     "Starter"=>"بداية",
     "Offer"=>"عرض",
@@ -117,7 +128,7 @@ return [
     "Pro"=>"محترف",
     "Unlimited"=>"بلا حدود",
     "Beginner"=>"مبتدا",
-    "advanced"=>"احتراف",
+    "Advanced"=>"احتراف",
     "Conversation"=>"محادثة",
     "Specials"=>"خاص",
     "Best"=>"الافضل",
@@ -129,6 +140,10 @@ return [
     "online session"=>"محاضرة على النت",
     "offline session"=>"محاضرة فى الفرع",
     "Buy now"=>"اشترى الان",
+    "French"=>"فرنساوى",
+    "Coming soon"=>"قريباً",
+    "All sessions are private"=>"جميع المحاضرات خاصة",
+    "one to one"=>"مدرس و طالب واحد",
 
     // Checkout
     "checkout"=>"الدفع",

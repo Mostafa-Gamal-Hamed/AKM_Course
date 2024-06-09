@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('admin.layout')
 
 @section('Title')
@@ -19,9 +23,13 @@
                     <div>
                         <p>The Amount: {{ $student->amount }}</p>
                         <p>Payment type: {{ $student->payment }}</p>
-                        <p>Paid day: {{ $student->Paid }}</p>
-                        <p>Start Date: {{ $student->startDate }}</p>
-                        <p>Level: {{ $student->level }}</p>
+                        @if ($student->payment == 'installment')
+                            <p>Remaining Amount: {{ $student->remaining }}</p>
+                            <p>Payment date: {{ Carbon::parse($student->paymentDate)->format('d-m-Y') }}</p>
+                        @endif
+                        <p>Paid day: {{ Carbon::parse($student->Paid)->format('d-m-Y') }}</p>
+                        <p>Start Date: {{ Carbon::parse($student->startDate)->format('d-m-Y') }}</p>
+                        <p>Levels: {{ $student->levels }}</p>
                     </div>
                 </div>
             </div>
@@ -202,14 +210,97 @@
                             @enderror
                             {{-- Errors Messages end --}}
                         </div>
+                        {{-- End Date --}}
+                        <div class="mb-3">
+                            <label for="EndDate">End Date</label>
+                            <input type="date" name="endDate" value="{{ $student->endDate }}" class="form-control"
+                                id="endDate" placeholder="End Date" required>
+                            {{-- Errors Messages start --}}
+                            <span id="endDateError"></span>
+                            @error('endDate')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
                         {{-- Level --}}
                         <div class="mb-3">
-                            <label for="level">Level</label>
-                            <input type="number" name="level" value="{{ $student->level }}" class="form-control"
-                                id="level" placeholder="Level" required>
+                            <label for="level">Levels</label>
+                            <input type="number" name="levels" value="{{ $student->levels }}" class="form-control"
+                                id="level" placeholder="Levels" required>
                             {{-- Errors Messages start --}}
                             <span id="levelError"></span>
-                            @error('level')
+                            @error('levels')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
+                        {{-- User level --}}
+                        <div class="mb-3">
+                            <label for="userLevel">User Level</label>
+                            <select name="userLevel" class="custom-select" id="userLevel">
+                                <option hidden>Select User Level</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            {{-- Errors Messages start --}}
+                            <span id="userLevelError"></span>
+                            @error('userLevel')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
+                        {{-- Sessions --}}
+                        <div class="mb-3">
+                            <label for="sessions">Sessions</label>
+                            <input type="number" name="sessions" value="{{ $student->sessions }}" class="form-control"
+                                id="sessions" placeholder="Sessions" required>
+                            {{-- Errors Messages start --}}
+                            <span id="sessionsError"></span>
+                            @error('sessions')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
+                        {{-- Attended --}}
+                        <div class="mb-3">
+                            <label for="Attended">Attended</label>
+                            <input type="number" name="Attended" value="{{ $student->Attended }}" class="form-control"
+                                id="Attended" placeholder="Attended" required>
+                            {{-- Errors Messages start --}}
+                            <span id="AttendedError"></span>
+                            @error('Attended')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
+                        {{-- Absented --}}
+                        <div class="mb-3">
+                            <label for="Absented">Absented</label>
+                            <input type="number" name="Absented" value="{{ $student->Absented }}" class="form-control"
+                                id="Absented" placeholder="Absented" required>
+                            {{-- Errors Messages start --}}
+                            <span id="AbsentedError"></span>
+                            @error('Absented')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            {{-- Errors Messages end --}}
+                        </div>
+                        {{-- Remaining sessions --}}
+                        <div class="mb-3">
+                            <label for="remainingSessions">Remaining sessions</label>
+                            <input type="number" name="remainingSessions" value="{{ $student->remainingSessions }}"
+                                class="form-control" id="remainingSessions" placeholder="Remaining sessions" required>
+                            {{-- Errors Messages start --}}
+                            <span id="remainingSessionsError"></span>
+                            @error('remainingSessions')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                             {{-- Errors Messages end --}}
@@ -285,8 +376,26 @@
         var StartDate = document.getElementById("StartDate");
         var StartDateError = document.getElementById("StartDateError");
 
+        var endDate = document.getElementById("endDate");
+        var endDateError = document.getElementById("endDateError");
+
         var level = document.getElementById("level");
         var levelError = document.getElementById("levelError");
+
+        var userLevel = document.getElementById("userLevel");
+        var userLevelError = document.getElementById("userLevelError");
+
+        var sessions = document.getElementById("sessions");
+        var sessionsError = document.getElementById("sessionsError");
+
+        var Attended = document.getElementById("Attended");
+        var AttendedError = document.getElementById("AttendedError");
+
+        var Absented = document.getElementById("Absented");
+        var AbsentedError = document.getElementById("AbsentedError");
+
+        var remainingSessions = document.getElementById("remainingSessions");
+        var remainingSessionsError = document.getElementById("remainingSessionsError");
 
         var image = document.getElementById("image");
         var imageError = document.getElementById("imageError");
@@ -554,7 +663,22 @@
             }
         });
 
-        // For paid and start date
+        // End date
+        endDate.addEventListener("input", function() {
+            const inputValue = endDate.value;
+
+            // Check if date or not
+            if (isValidDate(inputValue)) {
+                endDate.style.border = "2px solid green";
+                endDateError.innerHTML = "";
+            } else {
+                endDate.style.border = "2px solid red";
+                endDateError.innerHTML = "This is not date";
+                endDateError.style.color = "red";
+            }
+        });
+
+        // For paid and start date and end date
         function isValidDate(dateString) {
             let date = new Date(dateString);
             return !isNaN(date.getTime());
@@ -580,6 +704,126 @@
             } else {
                 level.style.border = "2px solid green";
                 levelError.innerHTML = "";
+            }
+        });
+
+        // userLevel
+        userLevel.addEventListener("change", function() {
+            const inputValue = userLevel.value;
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            // Check if not a male or female
+            if (inputValue < 1 || inputValue > 10) {
+                userLevel.style.border = "2px solid red";
+                userLevelError.innerHTML = "It must be between 1 to 10 only";
+                userLevelError.style.color = "red";
+                button.style.display = "none";
+                buttonError.innerHTML = "Something is wrong";
+                buttonError.style.color = "red";
+            } else if (inputValue === "") {
+                userLevel.style.border = "2px solid red";
+                userLevelError.innerHTML = "Empty";
+                userLevelError.style.color = "red";
+                button.style.display = "none";
+                buttonError.innerHTML = "Something is wrong";
+                buttonError.style.color = "red";
+            } else {
+                userLevel.style.border = "2px solid green";
+                userLevelError.innerHTML = "";
+                buttonError.innerHTML = "";
+                button.style.display = "block";
+            }
+        });
+
+        // Sessions
+        sessions.addEventListener("keyup", function() {
+            const inputValue = sessions.value;
+
+            // Check if not a number
+            if (isNaN(inputValue)) {
+                sessions.style.border = "2px solid red";
+                sessionsError.innerHTML = "Only Numbers";
+                sessionsError.style.color = "red";
+            } else if (inputValue === "") {
+                sessions.style.border = "2px solid red";
+                sessionsError.innerHTML = "Empty";
+                sessionsError.style.color = "red";
+            } else if (inputValue > 14) {
+                sessions.style.border = "2px solid red";
+                sessionsError.innerHTML = "It's more than 14 days";
+                sessionsError.style.color = "red";
+            } else {
+                sessions.style.border = "2px solid green";
+                sessionsError.innerHTML = "";
+            }
+        });
+
+        // Attended
+        Attended.addEventListener("keyup", function() {
+            const inputValue = Attended.value;
+
+            // Check if not a number
+            if (isNaN(inputValue)) {
+                Attended.style.border = "2px solid red";
+                AttendedError.innerHTML = "Only Numbers";
+                AttendedError.style.color = "red";
+            } else if (inputValue === "") {
+                Attended.style.border = "2px solid red";
+                AttendedError.innerHTML = "Empty";
+                AttendedError.style.color = "red";
+            } else if (inputValue > 14) {
+                Attended.style.border = "2px solid red";
+                AttendedError.innerHTML = "It's more than 14 days";
+                AttendedError.style.color = "red";
+            } else {
+                Attended.style.border = "2px solid green";
+                AttendedError.innerHTML = "";
+            }
+        });
+
+        // Absented
+        Absented.addEventListener("keyup", function() {
+            const inputValue = Absented.value;
+
+            // Check if not a number
+            if (isNaN(inputValue)) {
+                Absented.style.border = "2px solid red";
+                AbsentedError.innerHTML = "Only Numbers";
+                AbsentedError.style.color = "red";
+            } else if (inputValue === "") {
+                Absented.style.border = "2px solid red";
+                AbsentedError.innerHTML = "Empty";
+                AbsentedError.style.color = "red";
+            } else if (inputValue > 14) {
+                Absented.style.border = "2px solid red";
+                AbsentedError.innerHTML = "It's more than 14 days";
+                AbsentedError.style.color = "red";
+            } else {
+                Absented.style.border = "2px solid green";
+                AbsentedError.innerHTML = "";
+            }
+        });
+
+        // Remaining sessions
+        remainingSessions.addEventListener("keyup", function() {
+            const inputValue = remainingSessions.value;
+
+            // Check if not a number
+            if (isNaN(inputValue)) {
+                remainingSessions.style.border = "2px solid red";
+                remainingSessionsError.innerHTML = "Only Numbers";
+                remainingSessionsError.style.color = "red";
+            } else if (inputValue === "") {
+                remainingSessions.style.border = "2px solid red";
+                remainingSessionsError.innerHTML = "Empty";
+                remainingSessionsError.style.color = "red";
+            } else if (inputValue > 14) {
+                remainingSessions.style.border = "2px solid red";
+                remainingSessionsError.innerHTML = "It's more than 14 days";
+                remainingSessionsError.style.color = "red";
+            } else {
+                remainingSessions.style.border = "2px solid green";
+                remainingSessionsError.innerHTML = "";
             }
         });
 

@@ -16,7 +16,7 @@
                                 <th>Name</th>
                                 <th>Comment</th>
                                 <th>Price</th>
-                                <th>MfferPrice</th>
+                                <th>OfferPrice</th>
                                 <th>Month</th>
                                 <th>Sessions</th>
                                 <th>Type</th>

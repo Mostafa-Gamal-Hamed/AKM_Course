@@ -33,7 +33,7 @@ return new class extends Migration
             $table->bigInteger("remainingSessions")->nullable();
             $table->string("image");
             $table->foreignId("country_codes_id")->constrained()->onUpdate("cascade")->onDelete("cascade");
-            $table->foreignId("levels_id")->constrained()->onUpdate("cascade")->onDelete("cascade");
+            $table->foreign("levels_level")->references("level")->on("levels")->onUpdate("cascade")->onDelete("cascade");
             $table->timestamps();
         });
     }

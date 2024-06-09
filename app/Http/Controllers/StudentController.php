@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\User\countryCode;
@@ -38,7 +39,13 @@ class StudentController extends Controller
             "amount"=>"required|integer|min_digits:1",
             "Paid"=>"required|date",
             "startDate"=>"required|date",
-            "level"=>"required|integer|between:1,14",
+            "endDate"=>"required|date",
+            "levels"=>"required|integer|between:1,10",
+            "userLevel"=>"required|integer|exists:levels,level",
+            "sessions"=>"required|integer",
+            "Attended"=>"required|integer",
+            "Absented"=>"required|integer",
+            "remainingSessions"=>"required|integer",
             "image"=>"required|image|mimes:png,jpg,jpeg"
         ]);
 
@@ -65,7 +72,13 @@ class StudentController extends Controller
                 "paymentDate"=>$request->paymentDate,
                 "Paid"=>$request->Paid,
                 "startDate"=>$request->startDate,
-                "level"=>$request->level,
+                "endDate"=>$request->endDate,
+                "levels"=>$request->levels,
+                "levels_level"=>$request->userLevel,
+                "sessions"=>$request->sessions,
+                "Attended"=>$request->Attended,
+                "Absented"=>$request->Absented,
+                "remainingSessions"=>$request->remainingSessions,
                 "image"=>$data['image'],
                 "country_codes_id"=>$request->countryCode
             ]);
@@ -84,7 +97,13 @@ class StudentController extends Controller
                 "amount"=>$request->amount,
                 "Paid"=>$request->Paid,
                 "startDate"=>$request->startDate,
-                "level"=>$request->level,
+                "endDate"=>$request->endDate,
+                "levels"=>$request->levels,
+                "levels_level"=>$request->userLevel,
+                "sessions"=>$request->sessions,
+                "Attended"=>$request->Attended,
+                "Absented"=>$request->Absented,
+                "remainingSessions"=>$request->remainingSessions,
                 "image"=>$data['image'],
                 "country_codes_id"=>$request->countryCode
             ]);
@@ -123,7 +142,13 @@ class StudentController extends Controller
             "amount"=>"required|integer|min_digits:1",
             "Paid"=>"required|date",
             "startDate"=>"required|date",
-            "level"=>"required|integer|between:1,14"
+            "endDate"=>"required|date",
+            "levels"=>"required|integer|between:1,10",
+            "userLevel"=>"required|integer|exists:levels,level",
+            "sessions"=>"required|integer",
+            "Attended"=>"required|integer",
+            "Absented"=>"required|integer",
+            "remainingSessions"=>"required|integer",
         ]);
 
         // Check if exist
@@ -159,7 +184,13 @@ class StudentController extends Controller
                     "paymentDate"=>$request->paymentDate,
                     "Paid"=>$request->Paid,
                     "startDate"=>$request->startDate,
-                    "level"=>$request->level,
+                    "endDate"=>$request->endDate,
+                    "levels"=>$request->levels,
+                    "levels_level"=>$request->userLevel,
+                    "sessions"=>$request->sessions,
+                    "Attended"=>$request->Attended,
+                    "Absented"=>$request->Absented,
+                    "remainingSessions"=>$request->remainingSessions,
                     "image"=>$data['image'],
                     "country_codes_id"=>$request->countryCode
                 ]);
@@ -178,7 +209,13 @@ class StudentController extends Controller
                 "paymentDate"=>$request->paymentDate,
                 "Paid"=>$request->Paid,
                 "startDate"=>$request->startDate,
-                "level"=>$request->level,
+                "endDate"=>$request->endDate,
+                "levels"=>$request->levels,
+                "levels_level"=>$request->userLevel,
+                "sessions"=>$request->sessions,
+                "Attended"=>$request->Attended,
+                "Absented"=>$request->Absented,
+                "remainingSessions"=>$request->remainingSessions,
                 "country_codes_id"=>$request->countryCode
             ]);
         }else{
@@ -201,7 +238,13 @@ class StudentController extends Controller
                     "paymentDate"=>$request->paymentDate,
                     "Paid"=>$request->Paid,
                     "startDate"=>$request->startDate,
-                    "level"=>$request->level,
+                    "endDate"=>$request->endDate,
+                    "levels"=>$request->levels,
+                    "levels_level"=>$request->userLevel,
+                    "sessions"=>$request->sessions,
+                    "Attended"=>$request->Attended,
+                    "Absented"=>$request->Absented,
+                    "remainingSessions"=>$request->remainingSessions,
                     "image"=>$data['image'],
                     "country_codes_id"=>$request->countryCode
                 ]);
@@ -218,8 +261,15 @@ class StudentController extends Controller
                 "amount"=>$request->amount,
                 "Paid"=>$request->Paid,
                 "startDate"=>$request->startDate,
-                "level"=>$request->level,
-                "country_codes_id"=>$request->countryCode
+                "endDate"=>$request->endDate,
+                "levels"=>$request->levels,
+                "levels_level"=>$request->userLevel,
+                "sessions"=>$request->sessions,
+                "Attended"=>$request->Attended,
+                "Absented"=>$request->Absented,
+                "remainingSessions"=>$request->remainingSessions,
+                "country_codes_id"=>$request->countryCode,
+                "levels_id"=>$request->countryCode
             ]);
         }
 

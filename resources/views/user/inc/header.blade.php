@@ -33,13 +33,24 @@
     <script src="{{ asset('assets/js/jquery.countTo.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/modernizr-2.6.2.min.js') }}"></script>
-    {{-- Demo class --}}
+    {{-- Jquery --}}
     <script>
+        // Demo class home page
         $(document).ready(function() {
             let interval = 500;
             for (let i = 1; i <= 10; i++) {
                 setTimeout(function() {
                     $('#demo_a').toggle();
+                }, interval * i);
+            }
+        });
+
+        // french pricing page
+        $(document).ready(function() {
+            let interval = 500;
+            for (let i = 1; i <= 100; i++) {
+                setTimeout(function() {
+                    $('#french').toggle();
                 }, interval * i);
             }
         });
@@ -52,4 +63,4 @@
     <div class="fh5co-loader"></div>
 
     <div id="page">
-        
+

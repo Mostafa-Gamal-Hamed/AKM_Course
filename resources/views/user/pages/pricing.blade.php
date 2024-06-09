@@ -5,112 +5,98 @@
 @endsection
 
 <style>
-    .header {
-        margin-top: 100px;
-        font-weight: bold;
+    .language {
+        position: relative;
     }
-    .buyNow{
-        transition: 0.5s ease-in-out;
+
+    .language .open {
+        position: absolute;
+        right: 0px;
+        top: 20px;
+        transform: rotate(45deg);
+        width: 65px;
+        border-radius: 5px;
     }
-    .buyNow:hover{
-        font-size: 19px;
+
+    .language .soon {
+        position: absolute;
+        right: 0px;
+        top: 20px;
+        transform: rotate(45deg);
+        width: 65px;
+        border-radius: 5px;
     }
 </style>
 
 @section('Body')
     {{-- Header --}}
-    <h1 class="header text-center">{{ __('messages.Plans and Pricing') }}</h1>
+    <h1 class="text-center fw-bold text-primary mt-5">{{ __('messages.Languages') }}</h1>
 
     {{-- Pricing --}}
     <div id="fh5co-pricing">
         <div class="container">
-            <div class="owlPricing pricing p-2 bg-light">
-                @foreach ($plans as $plan)
-                    <div class="owl-item animate-box">
-                        <div class="price-box shadow" style="min-height: 450px;">
-                            {{-- Name & Comment --}}
-                            <h2 class="pricing-plan fw-bolder text-primary">
-                                {{ __("messages.$plan->name") }}
-                                @if ($plan->comment != null)
-                                    <span class="fw-bolder text-danger">{{ __("messages.$plan->comment") }}</span>
-                                @endif
-                            </h2>
-                            {{-- Price & OfferPrice --}}
-                            @if ($plan->offerPrice != null)
-                                <p><del>$ {{ $plan->price }}</del></p>
-                                <div class="price">
-                                    <sup class="currency">$</sup>{{ $plan->offerPrice }}
-                                </div>
-                            @else
-                                <div class="price">
-                                    <sup class="currency">$</sup>{{ $plan->price }}
-                                </div>
-                            @endif
-                            {{-- Month --}}
-                            <div class="m-2">
-                                <small>{{ $plan->month }}/{{ __('messages.month') }}</small>
-                            </div>
-                            {{-- Type & Sessions --}}
-                            <ul class="classes">
-                                <li class="text-light bg-secondary mb-2 rounded">{{ __("messages.$plan->type") }}</li>
-                                <li class="text-light bg-warning rounded">{{ $plan->sessions }} {{__("messages.sessions")}}</li>
-                            </ul>
-
-                            <a href="{{ url("checkout/$plan->id") }}" class="buyNow btn btn-select-plan btn-sm">{{__("messages.Buy now")}}</a>
+            <div class="mb-5">
+                <div class="p-3">
+                    <div class="row gap-3 p-3 flexColumn justify-content-between align-items-center">
+                        {{-- English --}}
+                        <a href="{{ url('pricingDetails') }}"
+                            class="language col-3 nav-link shadow bg-light border p-3 text-center rounded mb-4 column showPricing">
+                            {{-- Note --}}
+                            <div class="bg-success open"><span class="text-light"
+                                    id="french">{{ __('messages.Open') }}</span></div>
+                            {{-- Image --}}
+                            <img src="{{ asset('images/English-Language.jpg') }}" class="img-fluid rounded"
+                                style="height: 135px; width: 240px;" alt="English">
+                            {{-- Name --}}
+                            <h4 class="fw-bold mt-3">{{ __('messages.English Courses') }}</h4>
+                        </a>
+                        {{-- French --}}
+                        <div
+                            class="language col-3 nav-link shadow bg-light border p-3 text-center rounded mb-4 column showPricing">
+                            {{-- Note --}}
+                            <div class="bg-danger soon"><span class="text-light">{{ __('messages.Soon') }}</span></div>
+                            {{-- Image --}}
+                            <img src="{{ asset('images/french-Language.jpeg') }}" style="height: 135px; width: 240px;"
+                                class="img-fluid rounded" alt="French">
+                            {{-- Name --}}
+                            <h4 class="fw-bold mt-3">{{ __('messages.French Courses') }}</h4>
+                        </div>
+                        {{-- German --}}
+                        <div
+                            class="language col-3 nav-link shadow bg-light border p-3 text-center rounded mb-4 column showPricing">
+                            {{-- Note --}}
+                            <div class="bg-danger soon"><span class="text-light">{{ __('messages.Soon') }}</span></div>
+                            {{-- Image --}}
+                            <img src="{{ asset('images/German-Language.png') }}" style="height: 135px; width: 240px;"
+                                class="img-fluid rounded" alt="German">
+                            {{-- Name --}}
+                            <h4 class="fw-bold mt-3">{{ __('messages.German Courses') }}</h4>
+                        </div>
+                        {{-- Italy --}}
+                        <div
+                            class="language col-3 nav-link shadow bg-light border p-3 text-center rounded mb-4 column showPricing">
+                            {{-- Note --}}
+                            <div class="bg-danger soon"><span class="text-light">{{ __('messages.Soon') }}</span></div>
+                            {{-- Image --}}
+                            <img src="{{ asset('images/Italy-Language.jpg') }}" class="img-fluid rounded"
+                                style="height: 135px; width: 240px;" alt="Italy">
+                            {{-- Name --}}
+                            <h4 class="fw-bold mt-3">{{ __('messages.Italy Courses') }}</h4>
+                        </div>
+                        {{-- Chinese --}}
+                        <div
+                            class="language col-3 nav-link shadow bg-light border p-3 text-center rounded mb-4 column showPricing">
+                            {{-- Note --}}
+                            <div class="bg-danger soon"><span class="text-light">{{ __('messages.Soon') }}</span></div>
+                            {{-- Image --}}
+                            <img src="{{ asset('images/Chinese-Language.jpeg') }}" class="img-fluid rounded"
+                                style="height: 135px; width: 240px;" alt="Chinese">
+                            {{-- Name --}}
+                            <h4 class="fw-bold mt-3">{{ __('messages.Chinese Courses') }}</h4>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>
-
-
-    @if (session()->get('lang') == 'ar')
-        <script>
-            // Owl
-            $(document).ready(function() {
-                $(".owlPricing").owlCarousel({
-                    loop: true,
-                    dots: true,
-                    rtl: true,
-                    autoplay: true,
-                    autoplayTimeout : 3000,
-                    responsive: {
-                        0: {
-                            items: 1,
-                        },
-                        500: {
-                            items: 2,
-                        },
-                        800: {
-                            items: 3,
-                        }
-                    }
-                });
-            });
-        </script>
-    @else
-        <script>
-            // Owl
-            $(document).ready(function() {
-                $(".owlPricing").owlCarousel({
-                    loop: true,
-                    dots: true,
-                    autoplay: true,
-                    autoplayTimeout : 3000,
-                    responsive: {
-                        0: {
-                            items: 1,
-                        },
-                        500: {
-                            items: 2,
-                        },
-                        800: {
-                            items: 3,
-                        }
-                    }
-                });
-            });
-        </script>
-    @endif
 @endsection

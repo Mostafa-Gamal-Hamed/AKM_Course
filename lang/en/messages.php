@@ -102,6 +102,17 @@ return [
     "At AKM, we are committed to providing our students with a positive and effective learning experience. If you are not satisfied with your tutoring experience for any reason, please let us know and we will do our best to resolve the issue. We also offer a satisfaction guarantee, which means that if you are not satisfied with your learning experience, we will refund your money."=>"At AKM, we are committed to providing our students with a positive and effective learning experience. If you are not satisfied with your tutoring experience for any reason, please let us know and we will do our best to resolve the issue. We also offer a satisfaction guarantee, which means that if you are not satisfied with your learning experience, we will refund your money.",
 
     // Pricing page
+    "Languages"=>"Languages",
+    "Open"=>"Open",
+    "Soon"=>"Soon",
+    "English Courses"=>"English Courses",
+    "French Courses"=>"French Courses",
+    "German Courses"=>"German Courses",
+    "Italy Courses"=>"Italy Courses",
+    "Chinese Courses"=>"Chinese Courses",
+
+    // PricingDetails page
+    "Pricing Details"=>"Pricing Details",
     "Plans and Pricing"=>"Plans and Pricing",
     "Starter"=>"Starter",
     "Offer"=>"Offer",
@@ -116,7 +127,7 @@ return [
     "Pro"=>"Pro",
     "Unlimited"=>"Unlimited",
     "Beginner"=>"Beginner",
-    "advanced"=>"advanced",
+    "Advanced"=>"Advanced",
     "Conversation"=>"Conversation",
     "Specials"=>"Specials",
     "Best"=>"Best",
@@ -128,6 +139,10 @@ return [
     "online session"=>"online session",
     "offline session"=>"offline session",
     "Buy now"=>"Buy now",
+    "French"=>"French",
+    "Coming soon"=>"Coming soon",
+    "All sessions are private"=>"All sessions are private",
+    "one to one"=>"one to one",
 
     // Checkout
     "checkout"=>"checkout",
