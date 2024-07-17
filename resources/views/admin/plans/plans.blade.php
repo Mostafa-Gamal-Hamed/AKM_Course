@@ -15,6 +15,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Comment</th>
+                                <th>Country</th>
                                 <th>Price</th>
                                 <th>OfferPrice</th>
                                 <th>Month</th>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{$plan->name}}</td>
                                     <td>{{$plan->comment}}</td>
+                                    <td>{{$plan->countryName}}</td>
                                     <td>{{$plan->price}}</td>
                                     <td>{{$plan->offerPrice}}</td>
                                     <td>{{$plan->month}}</td>

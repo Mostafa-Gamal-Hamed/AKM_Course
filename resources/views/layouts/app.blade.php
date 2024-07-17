@@ -16,7 +16,9 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        <link rel="stylesheet" href="{{asset('build/assets/app-DMMhceos.css')}}">
+        <script src="{{asset('build/assets/app-BgvOogpt.js')}}"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

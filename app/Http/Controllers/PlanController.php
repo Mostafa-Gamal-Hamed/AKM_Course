@@ -29,6 +29,7 @@ class PlanController extends Controller
         // Validation
         $request->validate([
             "name"=>"required|string|min:3",
+            "countryName"=>"required|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
             "price"=>"required|numeric",
             "month"=>"required|numeric",
             "sessions"=>"required|numeric",
@@ -45,6 +46,7 @@ class PlanController extends Controller
         Plan::create([
             "name"=>$request->name,
             "comment"=>$request->comment,
+            "countryName"=>$request->countryName,
             "price"=>$request->price,
             "offerPrice"=>$request->offerPrice,
             "month"=>$request->month,
@@ -63,6 +65,7 @@ class PlanController extends Controller
         // Validation
         $request->validate([
             "name"=>"required|string|min:3",
+            "countryName"=>"required|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
             "price"=>"required|numeric",
             "month"=>"required|numeric",
             "sessions"=>"required|numeric",
@@ -78,6 +81,7 @@ class PlanController extends Controller
         $plan->update([
             "name"=>$request->name,
             "comment"=>$request->comment,
+            "countryName"=>$request->countryName,
             "price"=>$request->price,
             "offerPrice"=>$request->offerPrice,
             "month"=>$request->month,

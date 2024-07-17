@@ -9,6 +9,6 @@ class Plan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "name","comment","price","offerPrice","month","sessions","type"
+        "name","comment","countryName","price","offerPrice","month","sessions","type"
     ];
 }

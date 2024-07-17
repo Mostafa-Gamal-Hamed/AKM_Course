@@ -33,6 +33,26 @@
                     @enderror
                     {{-- Errors Messages end --}}
                 </div>
+                {{-- Country name --}}
+                <div class="mb-3">
+                    <label for="countryName">Country name</label>
+                    <select name="countryName" class="custom-select" id="countryName">
+                        <option hidden>Select country</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    {{-- Errors Messages start --}}
+                    <span id="countryError"></span>
+                    @error('countryName')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                    {{-- Errors Messages end --}}
+                </div>
                 {{-- Price --}}
                 <div class="mb-3">
                     <label for="price">The Price</label>
@@ -113,6 +133,9 @@
         var comment = document.getElementById("comment");
         var commentError = document.getElementById("commentError");
 
+        var country = document.getElementById("countryName");
+        var countryError = document.getElementById("countryNameError");
+
         var price = document.getElementById("price");
         var priceError = document.getElementById("priceError");
 
@@ -161,6 +184,16 @@
 
             comment.style.border = "2px solid green";
             commentError.innerHTML = "";
+        });
+
+        // country
+        country.addEventListener("change", function() {
+            const inputValue = country.value;
+
+            country.style.border = "2px solid green";
+            countryError.innerHTML = "";
+            buttonError.innerHTML = "";
+            button.style.display = "block";
         });
 
         // price

@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('Title')
-    {{__("messages.checkout")}}
+    {{ __('messages.checkout') }}
 @endsection
 
 <style>
@@ -25,12 +25,13 @@
 
 @section('Body')
     {{-- Header --}}
-    <h1 class="header text-center">{{__("messages.checkout")}}</h1>
+    <h1 class="text-center mt-5 mb-5">{{ __('messages.checkout') }}</h1>
+
     <div class="container">
         <div class="row flexColumn justify-content-between">
             <div class="col-4 column text-center mb-5">
                 <div class="shadow border p-3 text-center rounded mb-4 column showPricing">
-                    <h2 class="fw-bold">{{__("messages.Your Plan")}}</h2>
+                    <h2 class="fw-bold">{{ __('messages.Your Plan') }}</h2>
                     <div>
                         {{-- Name --}}
                         <h4 class="fw-bold">{{ __("messages.$plan->name") }}</h4>
@@ -40,11 +41,20 @@
                         @endif
                         {{-- Price & OfferPrice --}}
                         @if ($plan->offerPrice != null)
-                            <h5 class="text-danger">EGP <del>{{ $plan->price }}</del></h5>
-                            <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
-                        @else
-                            <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
-                        @endif
+                                        @if (session()->get('lang') == 'ar')
+                                            <h5 class="text-danger"><del>{{ $plan->price }}</del> {{ __("messages.$currency") }}</h5>
+                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
+                                        @else
+                                            <h5 class="text-danger">{{ __("messages.$currency") }}  <del>{{ $plan->price }}</del></h5>
+                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
+                                        @endif
+                                    @else
+                                        @if (session()->get('lang') == 'ar')
+                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
+                                        @else
+                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
+                                        @endif
+                                    @endif
                         {{-- Month --}}
                         <h5 class="bg-secondary text-light p-2">{{ $plan->month }}/{{ __('messages.month') }}
                         </h5>
@@ -58,9 +68,9 @@
                 </div>
             </div>
             <div class="col-8 column text-center">
-                <form action="{{ route("checkout","$plan->id") }}" method="post" class="shadow bg-light p-3 rounded">
+                <form action="{{ route('payment', "$plan->id") }}" method="post" class="shadow bg-light p-3 rounded">
                     @csrf
-                    <h2 class="text-center fw-bold">{{__("messages.Billing details")}}</h2>
+                    <h2 class="text-center fw-bold">{{ __('messages.Billing details') }}</h2>
                     {{-- Name --}}
                     <div class="row">
                         {{-- First Name --}}
@@ -112,39 +122,27 @@
                         @enderror
                         {{-- Errors Messages end --}}
                     </div>
-                    {{-- Message --}}
-                    <div class="form-floating mb-4">
-                        <textarea class="form-control" name="message" placeholder="Leave a comment here" id="message" @required(true)>{{ old('message') }}</textarea>
-                        <label for="message">{{ __('messages.How Can We Assist You?') }}</label>
-                        {{-- Errors Messages start --}}
-                        <span id="messageError"></span>
-                        @error('message')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
 
-                    <button type="submit" class="btn btn-success">{{__("messages.continue")}}</button>
+                    <button type="submit" class="btn btn-success">{{ __('messages.continue') }}</button>
                 </form>
             </div>
         </div>
     </div>
 
+
     <script>
         // JS
         const firstName = document.getElementById("firstName");
-        const firstMSG  = document.getElementById("firstError");
+        const firstMSG = document.getElementById("firstError");
 
         const email = document.getElementById("email");
-        const emailMSG  = document.getElementById("emailError");
+        const emailMSG = document.getElementById("emailError");
 
-        const lastName  = document.getElementById("lastName");
-        const lastMSG   = document.getElementById("lastError");
+        const lastName = document.getElementById("lastName");
+        const lastMSG = document.getElementById("lastError");
 
         const number = document.getElementById("number");
         const numberMSG = document.getElementById("numberError");
-
-        const message = document.getElementById("message");
-        const messageMSG = document.getElementById("messageError");
 
         //// Validation
 
@@ -153,11 +151,11 @@
             const regex = /\d/;
 
             // Check if has less than 3 char or has a number
-            if(regex.test(inputValue)){
+            if (regex.test(inputValue)) {
                 firstName.style.border = "2px solid red";
-                firstMSG.innerHTML     = "Only Letters";
-                firstMSG.style.color   = "red";
-            }else if (inputValue.length < 3) {
+                firstMSG.innerHTML = "Only Letters";
+                firstMSG.style.color = "red";
+            } else if (inputValue.length < 3) {
                 firstName.style.border = "2px solid red";
             } else {
                 firstName.style.border = "2px solid green";
@@ -170,11 +168,11 @@
             const regex = /\d/;
 
             // Check if has less than 3 char or has a number
-            if(regex.test(inputValue)){
+            if (regex.test(inputValue)) {
                 lastName.style.border = "2px solid red";
-                lastMSG.innerHTML     = "Only Letters";
-                lastMSG.style.color   = "red";
-            }else if (inputValue.length < 3) {
+                lastMSG.innerHTML = "Only Letters";
+                lastMSG.style.color = "red";
+            } else if (inputValue.length < 3) {
                 lastName.style.border = "2px solid red";
             } else {
                 lastName.style.border = "2px solid green";
@@ -189,8 +187,8 @@
             // Check if has less than 3 char or has a number
             if (inputValue == "") {
                 email.style.border = "2px solid red";
-                emailMSG.innerHTML     = "Empty";
-                emailMSG.style.color   = "red";
+                emailMSG.innerHTML = "Empty";
+                emailMSG.style.color = "red";
             } else {
                 email.style.border = "2px solid green";
                 emailMSG.innerHTML = "";
@@ -203,7 +201,7 @@
                 number.style.border = "2px solid red";
                 numberMSG.innerHTML = "Only Numbers";
                 numberMSG.style.color = "red";
-            }else if(inputValue.length < 10 || inputValue.length > 11) {
+            } else if (inputValue.length < 10 || inputValue.length > 11) {
                 number.style.border = "2px solid red";
                 numberMSG.innerHTML = "must be 9 or 13 numbers";
                 numberMSG.style.color = "red";
@@ -212,24 +210,5 @@
                 numberMSG.innerHTML = "";
             }
         });
-
-        message.addEventListener("keyup", function() {
-            const inputValue = message.value;
-            const regex = /\d/;
-
-            if(regex.test(inputValue)){
-                message.style.border = "2px solid red";
-                messageMSG.innerHTML     = "Only Letters";
-                messageMSG.style.color   = "red";
-            }else if (inputValue == "") {
-                message.style.border = "2px solid red";
-                messageMSG.style.color   = "red";
-                messageMSG.innerHTML     = "Empty";
-            } else {
-                message.style.border = "2px solid green";
-                messageMSG.innerHTML = "";
-            }
-        });
     </script>
-
 @endsection

@@ -110,6 +110,20 @@ return [
     "German Courses"=>"German Courses",
     "Italy Courses"=>"Italy Courses",
     "Chinese Courses"=>"Chinese Courses",
+    "USD"=>"USD",
+    "EGP"=>"EGP",
+    "AED"=>"AED",
+    "SAR"=>"SAR",
+    "KWD"=>"KWD",
+    "QAR"=>"QAR",
+    "BHD"=>"BHD",
+
+    // BuyPlan page
+    "Contact us for booking"=>"Contact us for booking",
+    "To book the course and know the plans and prices, contact us on"=>"To book the course and know the plans and prices, contact us on",
+    "Whats app"=>"Whats app",
+    "Email"=>"Email",
+    "Or contact us on:"=>"Or contact us on:",
 
     // PricingDetails page
     "Pricing Details"=>"Pricing Details",

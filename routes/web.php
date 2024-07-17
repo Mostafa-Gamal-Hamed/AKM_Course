@@ -6,6 +6,7 @@ use App\Http\Controllers\DemoClassController;
 use App\Http\Controllers\FinancialAccountsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -233,12 +234,12 @@ Route::controller(userController::class)->group(function () {
     Route::post("contactUs", "contactUs")->name("contactUs");
     // Become tutor
     Route::post("becomeTutor", "becomeTutor")->name("becomeTutor");
-    // Checkout
-    Route::post("checkout/{id}", "checkout")->name("checkout");
     // tryForFree
     Route::get("tryForFree","tryForFree")->name("tryForFree");
     // Demo class
     Route::post("demoClass","storeDemoClass")->name("demoClass");
+    // Payment page
+    Route::post("payment/{id}", "payment")->name("payment");
 });
 
 // User pages
@@ -248,13 +249,13 @@ Route::controller(pagesController::class)->group(function () {
     // Route::get('blog', 'blog');
     Route::get('pricing','pricing');
     Route::get('pricingDetails','pricingDetails');
+    Route::get('buyPlan','buyPlan');
     Route::get('showBlog/{id}', 'showBlog');
     Route::get('aboutUs', 'aboutUs');
     Route::get('contact', 'contact');
     Route::get('becomeTutor', 'becomeTutor');
     Route::get('checkout/{id}', 'checkout');
+    Route::get('callback', 'callback');
 });
-
-
 
 require __DIR__ . '/auth.php';

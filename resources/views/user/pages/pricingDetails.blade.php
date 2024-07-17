@@ -52,10 +52,19 @@
                                     @endif
                                     {{-- Price & OfferPrice --}}
                                     @if ($plan->offerPrice != null)
-                                        <h5 class="text-danger">EGP <del>{{ $plan->price }}</del></h5>
-                                        <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
+                                        @if (session()->get('lang') == 'ar')
+                                            <h5 class="text-danger"><del>{{ $plan->price }}</del> {{ __("messages.$currency") }}</h5>
+                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
+                                        @else
+                                            <h5 class="text-danger">{{ __("messages.$currency") }}  <del>{{ $plan->price }}</del></h5>
+                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
+                                        @endif
                                     @else
-                                        <h4 class="text-primary">EGP{{ $plan->offerPrice }}</h4>
+                                        @if (session()->get('lang') == 'ar')
+                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
+                                        @else
+                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
+                                        @endif
                                     @endif
                                     {{-- Month --}}
                                     <h5 class="bg-secondary text-light p-2">{{ $plan->month }}/{{ __('messages.month') }}

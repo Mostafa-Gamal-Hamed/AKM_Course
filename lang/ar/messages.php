@@ -111,6 +111,20 @@ return [
     "German Courses"=>"دورات المانى",
     "Italy Courses"=>"دورات ايطالى",
     "Chinese Courses"=>"دورات صينى",
+    "USD"=>"دولار",
+    "EGP"=>"جنيه",
+    "AED"=>"درهم",
+    "SAR"=>"ريال سعودى",
+    "KWD"=>"دينار كويتى",
+    "QAR"=>"ريال قطرى",
+    "BHD"=>"دينار بحرينى",
+
+    // BuyPlan page
+    "Contact us for booking"=>"تواصل معنا للحجز",
+    "To book the course and know the plans and prices, contact us on"=>"لحجز دورة و معرفة الخطط و الاسعار, تواصل معنا من خلال",
+    "Whats app"=>"واتس اب",
+    "Email"=>"الحساب",
+    "Or contact us on:"=>"او تواصل معنا على:",
 
     // PricingDetails page
     "Pricing Details"=>"تفاصيل العرض",
