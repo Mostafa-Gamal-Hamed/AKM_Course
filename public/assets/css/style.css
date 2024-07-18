@@ -156,14 +156,14 @@ ul li:active > a {
 }
 
 .demo{
-    width: 100%;
+    width: 500%;
     height: 55px;
     white-space: nowrap;
     overflow: hidden;
     position: fixed;
     padding: 10px;
     z-index: 1;
-    bottom: 40px;
+    bottom: 70px;
 }
 .demo .demo_class{
     width: 150px;
@@ -1166,6 +1166,7 @@ ul li:active > a {
 }
 #fh5co-footer .copyright a {
     color: white !important;
+    font-size: 20px;
 }
 
 #map {

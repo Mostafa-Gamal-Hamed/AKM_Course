@@ -68,18 +68,28 @@
 
         <div class="row copyright border-top align-items-center pt-3">
             <div class="col-md-8">
-                <span class="mt-3">C{{__("messages.Copyright 2024 - All rights reserved.")}}</span>
+                <span class="mt-3">{{__("messages.Copyright 2024 - All rights reserved.")}}</span>
                 {{-- <span class="col pe-1"><a href="">Terms Of Use Student</a></span>
                 <span class="col border-start ps-1"><a href="">Terms Of Use Tutor</a></span> --}}
             </div>
             <div class="col-md-4">
-                <div class="d-flex align-items-end text-center">
-                    <span class="col-8">{{__("messages.Mobile")}}:+20 01066266189</span>
-                    <ul class="fh5co-social-icons col-4">
-                        <li><a target="_blank"
-                                href="https://www.facebook.com/profile.php?id=61554642702631&mibextid=ZbWKwL"
-                                class="nav-link"><i class="icon-facebook"></i></a></li>
-                    </ul>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                    <a target="_blank"
+                        href="https://www.facebook.com/profile.php?id=61554642702631&mibextid=ZbWKwL"
+                        class="nav-link"><i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a target="_blank"
+                        href="https://x.com/AKM_corses?t=BF3y0BPkjGoueijpVRjVxg&s=09"
+                        class="nav-link"><i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a target="_blank"
+                        href="https://www.tiktok.com/@akmcorses?_t=8nUWQaerglV&_r=1"
+                        class="nav-link"><i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    <a target="_blank"
+                        href="https://wa.me/201066266189"
+                        class="nav-link"><i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
         </div>
