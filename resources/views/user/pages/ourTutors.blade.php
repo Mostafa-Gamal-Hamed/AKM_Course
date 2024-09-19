@@ -59,15 +59,10 @@
 
 @section('Body')
     {{-- Header --}}
-    <h1 class="header text-center"><span class="text-danger">{{__("messages.Meet")}}</span> {{__("messages.Our Tutors")}}</h1>
+    <h1 class="header text-center"><span class="text-success">{{__("messages.Meet")}}</span> {{__("messages.Our Tutors")}}</h1>
 
     {{-- Our tutors --}}
     <div class="container bg-light shadow p-3 mb-5">
-        {{-- <div class="mb-5">
-            <h2 class="text-center fw-bold"><span class="text-danger">{{__("messages.Our Tutors")}}</span></h2>
-            <hr style="width: 10%; height: 3px; background:#fb3b80; margin:auto;">
-        </div> --}}
-
         <div class="flexColumn d-flex justify-content-between align-items-center">
             <div class="tutor column rounded-circle mb-5">
                 <div class="images mb-3">
@@ -113,7 +108,7 @@
     </div>
 
     {{-- Special tutors --}}
-    <div id="fh5co-explore" class="fh5co-bg-section mb-5" style="background-color: #03144f;">
+    <div id="fh5co-explore" class="fh5co-bg-section mb-5" style="background-color: #2d865a;">
         <div class="container">
             <div class="text-center text-light">
                 <h4 class="fw-bold text-light">{{__("messages.Not just anyone can become an AKM Tutor")}}</h4>

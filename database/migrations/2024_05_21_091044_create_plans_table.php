@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("comment")->nullable();
-            $table->enum("countryName", ["Egypt", "United Arab Emirates", "Saudi Arabia", "Kuwait", "Qatar", "Bahrain", "Other"])->default("Other");
+            $table->enum("countryName", ["Egypt", "United Arab Emirates", "Saudi Arabia", "Kuwait", "Qatar", "Bahrain", "Other"])->nullable();
             $table->bigInteger("price");
             $table->bigInteger("offerPrice")->nullable();
-            $table->string("month");
-            $table->string("sessions");
-            $table->enum("type", ["Online session"]);
+            $table->integer("month");
+            $table->integer("sessions");
+            $table->enum("type", ["privet","group","native"]);
             $table->timestamps();
         });
     }

@@ -41,20 +41,26 @@
                         @endif
                         {{-- Price & OfferPrice --}}
                         @if ($plan->offerPrice != null)
-                                        @if (session()->get('lang') == 'ar')
-                                            <h5 class="text-danger"><del>{{ $plan->price }}</del> {{ __("messages.$currency") }}</h5>
-                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
-                                        @else
-                                            <h5 class="text-danger">{{ __("messages.$currency") }}  <del>{{ $plan->price }}</del></h5>
-                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
-                                        @endif
-                                    @else
-                                        @if (session()->get('lang') == 'ar')
-                                            <h4 class="text-primary">{{ $plan->offerPrice }} {{ __("messages.$currency") }}</h4>
-                                        @else
-                                            <h4 class="text-primary">{{ __("messages.$currency") }} {{ $plan->offerPrice }}</h4>
-                                        @endif
-                                    @endif
+                            @if (session()->get('lang') == 'ar')
+                                @if ($currency === '$')
+                                    <h5 class="text-danger">{{ __("messages.$currency") }}<del>{{ $plan->price }}</del></h5>
+                                    <h4 class="text-primary">{{ __("messages.$currency") }}{{ $plan->offerPrice }}</h4>
+                                @else
+                                    <h5 class="text-danger"><del>{{ $plan->price }}</del>{{ __("messages.$currency") }}
+                                    </h5>
+                                    <h4 class="text-primary">{{ $plan->offerPrice }}{{ __("messages.$currency") }}</h4>
+                                @endif
+                            @else
+                                <h5 class="text-danger">{{ __("messages.$currency") }}<del>{{ $plan->price }}</del></h5>
+                                <h4 class="text-primary">{{ __("messages.$currency") }}{{ $plan->offerPrice }}</h4>
+                            @endif
+                        @else
+                            @if (session()->get('lang') == 'ar')
+                                <h4 class="text-primary">{{ $plan->price }}{{ __("messages.$currency") }}</h4>
+                            @else
+                                <h4 class="text-primary">{{ __("messages.$currency") }}{{ $plan->price }}</h4>
+                            @endif
+                        @endif
                         {{-- Month --}}
                         <h5 class="bg-secondary text-light p-2">{{ $plan->month }}/{{ __('messages.month') }}
                         </h5>
@@ -122,6 +128,17 @@
                         @enderror
                         {{-- Errors Messages end --}}
                     </div>
+                    {{-- Type --}}
+                    <div class="form-floating mb-3">
+                        <input type="text" name="type" class="form-control" value="{{ $plan->type }}"
+                            id="type" placeholder="type" hidden readonly autocomplete="on" minlength="3" required>
+                        {{-- Errors Messages start --}}
+                        <span id="typeError"></span>
+                        @error('type')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        {{-- Errors Messages end --}}
+                    </div>
 
                     <button type="submit" class="btn btn-success">{{ __('messages.continue') }}</button>
                 </form>
@@ -131,19 +148,19 @@
             <div class="container">
                 <div class="text-center shadow bg-light p-4">
                     <h3 class="mt-5 mb-5">
-                        {{__("messages.Or contact us on:")}}
+                        {{ __('messages.Or contact us on:') }}
                     </h3>
                     <div class="row mb-5">
                         <div class="col">
-                            <h5>{{__("messages.Whats app")}}</h5>
+                            <h5>{{ __('messages.Whats app') }}</h5>
                             <a href="https://wa.me/201066266189" target="_blank">
-                                <img src="{{asset('images/whatap.png')}}" width="90px" target="_blank" alt="Whats App">
+                                <img src="{{ asset('images/whatap.png') }}" width="90px" target="_blank" alt="Whats App">
                             </a>
                         </div>
                         <div class="col">
-                            <h5>{{__("messages.Email")}}</h5>
+                            <h5>{{ __('messages.Email') }}</h5>
                             <a href="mailto:hr@akmcourse.com" target="_blank">
-                                <img src="{{asset('images/Gmail.png')}}" width="90px" alt="Gmail">
+                                <img src="{{ asset('images/Gmail.png') }}" width="90px" alt="Gmail">
                             </a>
                         </div>
                     </div>
@@ -152,86 +169,77 @@
         </div>
     </div>
 
-
+    {{-- Validation --}}
     <script>
-        // JS
-        const firstName = document.getElementById("firstName");
-        const firstMSG = document.getElementById("firstError");
-
-        const email = document.getElementById("email");
-        const emailMSG = document.getElementById("emailError");
-
-        const lastName = document.getElementById("lastName");
-        const lastMSG = document.getElementById("lastError");
-
-        const number = document.getElementById("number");
-        const numberMSG = document.getElementById("numberError");
-
-        //// Validation
-
-        firstName.addEventListener("keyup", function() {
-            const inputValue = firstName.value;
-            const regex = /\d/;
-
-            // Check if has less than 3 char or has a number
-            if (regex.test(inputValue)) {
-                firstName.style.border = "2px solid red";
-                firstMSG.innerHTML = "Only Letters";
-                firstMSG.style.color = "red";
-            } else if (inputValue.length < 3) {
-                firstName.style.border = "2px solid red";
-            } else {
-                firstName.style.border = "2px solid green";
-                firstMSG.innerHTML = "";
+        $(document).ready(function() {
+            @if ($errors->any())
+                @foreach ($errors->keys() as $error)
+                    $("input[name='{{ $error }}']").css("border", "2px solid red");
+                @endforeach
+            @endif
+            // Reusable function for border and message handling
+            function handleValidation($input, $msg, condition, errorMsg) {
+                if (condition) {
+                    $input.css("border", "2px solid red");
+                    $msg.text(errorMsg).css("color", "red");
+                } else {
+                    $input.css("border", "2px solid green");
+                    $msg.text("");
+                }
             }
-        });
 
-        lastName.addEventListener("keyup", function() {
-            const inputValue = lastName.value;
-            const regex = /\d/;
-
-            // Check if has less than 3 char or has a number
-            if (regex.test(inputValue)) {
-                lastName.style.border = "2px solid red";
-                lastMSG.innerHTML = "Only Letters";
-                lastMSG.style.color = "red";
-            } else if (inputValue.length < 3) {
-                lastName.style.border = "2px solid red";
-            } else {
-                lastName.style.border = "2px solid green";
-                lastMSG.innerHTML = "";
+            // First and Last Name validation
+            function validateName($input, $msg) {
+                const value = $input.val();
+                const hasNumber = /\d/.test(value);
+                handleValidation($input, $msg, hasNumber || value.length < 3, hasNumber ?
+                    "{{ __('messages.Only Letters') }}" :
+                    "{{ __('messages.Must be at least 3 characters') }}");
             }
-        });
 
-        email.addEventListener("keyup", function() {
-            const inputValue = email.value;
-            const regex = /\d/;
+            // Email validation
+            function validateEmail($input, $msg) {
+                const value = $input.val();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            // Check if has less than 3 char or has a number
-            if (inputValue == "") {
-                email.style.border = "2px solid red";
-                emailMSG.innerHTML = "Empty";
-                emailMSG.style.color = "red";
-            } else {
-                email.style.border = "2px solid green";
-                emailMSG.innerHTML = "";
+                if (value === "") {
+                    handleValidation($input, $msg, true, "{{ __('messages.Email cannot be empty') }}");
+                } else if (!emailRegex.test(value)) {
+                    handleValidation($input, $msg, true, "{{ __('messages.Invalid email format') }}");
+                } else {
+                    handleValidation($input, $msg, false, "");
+                }
             }
-        });
 
-        number.addEventListener("keyup", function() {
-            const inputValue = number.value;
-            if (isNaN(inputValue)) {
-                number.style.border = "2px solid red";
-                numberMSG.innerHTML = "Only Numbers";
-                numberMSG.style.color = "red";
-            } else if (inputValue.length < 10 || inputValue.length > 11) {
-                number.style.border = "2px solid red";
-                numberMSG.innerHTML = "must be 9 or 13 numbers";
-                numberMSG.style.color = "red";
-            } else {
-                number.style.border = "2px solid green";
-                numberMSG.innerHTML = "";
+            // Number validation
+            function validateNumber($input, $msg) {
+                const value = $input.val();
+                handleValidation($input, $msg, isNaN(value) || value.length < 9 || value.length > 13, isNaN(value) ?
+                    "{{ __('messages.Only Numbers') }}" : "{{ __('messages.Must be 9-13 digits') }}");
             }
+
+            // Type validation
+            function validateType($input, $msg) {
+                handleValidation($input, $msg, $input.val() === "",
+                    "{{ __('messages.This field cannot be empty') }}");
+            }
+
+            // Apply validations on keyup
+            $("#firstName, #lastName").on("keyup", function() {
+                validateName($(this), $("#" + $(this).attr('id') + "{{ __('messages.Error') }}"));
+            });
+
+            $("#email").on("keyup", function() {
+                validateEmail($(this), $("#emailError"));
+            });
+
+            $("#number").on("keyup", function() {
+                validateNumber($(this), $("#numberError"));
+            });
+
+            $("#type").on("keyup", function() {
+                validateType($(this), $("#typeError"));
+            });
         });
     </script>
 @endsection

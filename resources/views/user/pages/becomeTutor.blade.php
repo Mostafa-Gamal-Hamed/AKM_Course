@@ -26,7 +26,7 @@
     {{-- Header --}}
     <div class="header mb-5">
         <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('images/Logo.jpg') }}" class="img-fluid rounded-circle" width="80px" alt="AKM">
+            <img src="{{ asset('images/akmi.jpeg') }}" class="img-fluid rounded-circle" width="80px" alt="AKM">
             <h3>AKM Language Course</h3>
         </div>
     </div>
@@ -171,7 +171,7 @@
             {{-- Resume --}}
             <div class="mb-3">
                 <label for="formFileSm" class="form-label">Your Resume</label>
-                <input type="file" name="resume" id="resume" class="form-control" required>
+                <input type="file" name="resume" id="resume" class="form-control" accept=".pdf" required>
                 {{-- Errors Messages start --}}
                 <span id="resumeError"></span>
                 @error('resume')
@@ -191,316 +191,135 @@
                 @enderror
                 {{-- Errors Messages end --}}
             </div>
-            <button type="submit" class="btn btn-primary" id="button">Submit</button>
+            <button type="submit" class="btn btn-success" id="button">Submit</button>
             <span id="buttonError"></span>
         </form>
     </div>
 
+    {{-- Validation --}}
     <script>
-        // Validation
-        const name = document.getElementById('name');
-        const nameError = document.getElementById('nameError');
+        $(document).ready(function() {
+            @if ($errors->any())
+                @foreach ($errors->keys() as $error)
+                    $("input[name='{{ $error }}']").css("border", "2px solid red");
+                    $("textarea[name='{{ $error }}']").css("border", "2px solid red");
+                @endforeach
+            @endif
+            const $button = $("#button");
+            const $buttonError = $("#buttonError");
 
-        const email = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-
-        const number = document.getElementById('phone');
-        const numberError = document.getElementById('phoneError');
-
-        const gender = document.getElementById('gender');
-        const genderError = document.getElementById('genderError');
-
-        const date = document.getElementById('date');
-        const dateError = document.getElementById('dateError');
-
-        const country = document.getElementById('country');
-        const countryError = document.getElementById('countryError');
-
-        const city = document.getElementById('city');
-        const cityError = document.getElementById('cityError');
-
-        const address = document.getElementById('address');
-        const addressError = document.getElementById('addressError');
-
-        const experience = document.getElementById('experience');
-        const experienceError = document.getElementById('experienceError');
-
-        const resume = document.getElementById('resume');
-        const resumeError = document.getElementById('resumeError');
-
-        const videoInput = document.getElementById('video');
-        const videoIError = document.getElementById("videoError");
-
-        const button = document.getElementById("button");
-        const buttonError = document.getElementById("buttonError");
-
-        // Name
-        name.addEventListener("keyup", function() {
-            const inputValue = name.value;
-            const regex = /\d/;
-
-            // Check if has less than 3 char or has a number
-            if (regex.test(inputValue)) {
-                name.style.border = "2px solid red";
-                nameError.innerHTML = "Only Letters";
-                nameError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Name Input";
-                buttonError.style.color = "red";
-            } else if (inputValue.length < 3) {
-                name.style.border = "2px solid red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Name Input";
-                buttonError.style.color = "red";
-            } else {
-                name.style.border = "2px solid green";
-                nameError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Email
-        email.addEventListener("keyup", function() {
-            const inputValue = email.value;
-
-            // Check if empty or not letters
-            if (inputValue == 0) {
-                email.style.border = "2px solid red";
-                emailError.innerHTML = "Empty";
-                emailError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In email Input";
-                buttonError.style.color = "red";
-            } else {
-                email.style.border = "2px solid green";
-                emailError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Phone
-        number.addEventListener("keyup", function() {
-            const inputValue = number.value;
-            if (isNaN(inputValue)) {
-                number.style.border = "2px solid red";
-                numberError.innerHTML = "Only Numbers";
-                numberError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Number Input";
-                buttonError.style.color = "red";
-            } else if (inputValue.length < 9 || inputValue.length > 13) {
-                number.style.border = "2px solid red";
-                numberError.innerHTML = "must be between 9 or 13 numbers";
-                numberError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Number Input";
-                buttonError.style.color = "red";
-            } else {
-                number.style.border = "2px solid green";
-                numberError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Gender
-        gender.addEventListener("change", function() {
-            if (gender.value != "male" && gender.value != "female") {
-                gender.style.border = "2px solid red";
-                genderError.innerHTML = "It must be male or female only";
-                genderError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Gender";
-                buttonError.style.color = "red";
-            } else {
-                gender.style.border = "2px solid green";
-                genderError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Country
-        country.addEventListener("keyup", function() {
-            const inputValue = country.value;
-            const regex = /\d/;
-
-            // Check if empty or not letters
-            if (inputValue == 0) {
-                country.style.border = "2px solid red";
-                countryError.innerHTML = "Empty";
-                countryError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Country Input";
-                buttonError.style.color = "red";
-            } else if (regex.test(inputValue)) {
-                country.style.border = "2px solid red";
-                countryError.innerHTML = "Only Letters";
-                countryError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Country Input";
-                buttonError.style.color = "red";
-            } else {
-                country.style.border = "2px solid green";
-                countryError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // City
-        city.addEventListener("keyup", function() {
-            const inputValue = city.value;
-            const regex = /\d/;
-
-            // Check if empty or not letters
-            if (inputValue == 0) {
-                city.style.border = "2px solid red";
-                cityError.innerHTML = "Empty";
-                cityError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In City Input";
-                buttonError.style.color = "red";
-            } else if (regex.test(inputValue)) {
-                city.style.border = "2px solid red";
-                cityError.innerHTML = "Only Letters";
-                cityError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In City Input";
-                buttonError.style.color = "red";
-            } else {
-                city.style.border = "2px solid green";
-                cityError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Address
-        address.addEventListener("keyup", function() {
-            const inputValue = address.value;
-
-            // Check if empty or not letters
-            if (inputValue == 0) {
-                address.style.border = "2px solid red";
-                addressError.innerHTML = "Empty";
-                addressError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Address Input";
-                buttonError.style.color = "red";
-            } else {
-                address.style.border = "2px solid green";
-                addressError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Birth date
-        date.addEventListener("input", function() {
-            const inputValue = date.value;
-            if (isValidDate(inputValue)) {
-                date.style.border = "2px solid green";
-                dateError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            } else {
-                dateError.textContent = "Invalid date format";
-                date.style.border = "2px solid red";
-                dateError.innerHTML = "This is not date";
-                dateError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Birth Date";
-                buttonError.style.color = "red";
-            }
-        });
-
-        function isValidDate(dateString) {
-            let date = new Date(dateString);
-            return !isNaN(date.getTime());
-        }
-
-        // experience
-        experience.addEventListener("keyup", function() {
-            const inputValue = experience.value;
-            if (isNaN(inputValue)) {
-                experience.style.border = "2px solid red";
-                experienceError.innerHTML = "Only Numbers";
-                experienceError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Some Thing Wrong In Experience Input";
-                buttonError.style.color = "red";
-            } else {
-                experience.style.border = "2px solid green";
-                experienceError.innerHTML = "";
-                button.style.display = "block";
-                buttonError.innerHTML = "";
-            }
-        });
-
-        // Resume
-        resume.addEventListener('change', function(event) {
-            var file = event.target.files[0];
-            if (file) {
-                var fileName = file.name.toLowerCase();
-                if (
-                    file.type === 'application/pdf' ||
-                    fileName.endsWith('.pdf')
-                ) {
-                    resume.style.border = "2px solid green";
-                    resumeError.innerHTML = "";
-                    button.style.display = "block";
-                    buttonError.innerHTML = "";
-                } else if (
-                    fileName.endsWith('.doc') ||
-                    fileName.endsWith('.docx') ||
-                    fileName.endsWith('.xlsx') ||
-                    file.type === 'application/msword' ||
-                    file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                ) {
-                    resume.style.border = "2px solid green";
-                    resumeError.innerHTML = "";
-                    button.style.display = "block";
-                    buttonError.innerHTML = "";
+            function handleValidation($input, $error, isValid, errorMsg) {
+                if (isValid) {
+                    $input.css("border", "2px solid green");
+                    $error.html("");
+                    $button.show();
+                    $buttonError.html("");
                 } else {
-                    resume.style.border = "2px solid red";
-                    resumeError.innerHTML = "The selected file is not a PDF or Word File.";
-                    resumeError.style.color = "red";
-                    button.style.display = "none";
-                    buttonError.innerHTML = "Some Thing Wrong In Resume Input";
-                    buttonError.style.color = "red";
+                    $input.css("border", "2px solid red");
+                    $error.html(errorMsg).css("color", "red");
+                    $button.hide();
+                    $buttonError.html("Some Thing Wrong In Input").css("color", "red");
                 }
             }
-        });
 
-        // Video
-        videoInput.addEventListener('change', function() {
-            const videoFile = this.files[0];
-            const video = document.createElement('video');
-            const reader = new FileReader();
+            // Validate Name
+            $("#name").on("keyup", function() {
+                const inputValue = $(this).val();
+                const hasNumber = /\d/.test(inputValue);
+                handleValidation($(this), $("#nameError"), inputValue.length >= 3 && !hasNumber,
+                    "Only Letters and at least 3 characters");
+            });
 
-            reader.onload = function(e) {
-                video.src = e.target.result;
-                video.addEventListener('loadedmetadata', function() {
-                    if (video.duration > 120) {
-                        videoInput.style.border = "2px solid red";
-                        videoIError.style.color = "red";
-                        videoIError.innerHTML = 'The video must be less than 2 minutes.';
-                        button.style.display = "none";
-                        buttonError.innerHTML = "Some Thing Wrong In Video Input";
-                        buttonError.style.color = "red";
-                    }else{
-                        videoInput.style.border = "2px solid green";
-                        videoIError.innerHTML = '';
-                        button.style.display = "block";
-                        buttonError.innerHTML = "";
-                    }
-                });
-            };
+            // Validate Email
+            $("#email").on("keyup", function() {
+                const inputValue = $(this).val();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const isValidEmail = emailPattern.test(inputValue);
 
-            reader.readAsDataURL(videoFile);
+                if (inputValue === "") {
+                    handleValidation($(this), $("#emailError"), false, "Email cannot be empty");
+                } else if (!isValidEmail) {
+                    handleValidation($(this), $("#emailError"), false, "Invalid email format");
+                } else {
+                    handleValidation($(this), $("#emailError"), true, "");
+                }
+            });
+
+            // Validate Phone
+            $("#phone").on("keyup", function() {
+                const inputValue = $(this).val();
+                const isValid = !isNaN(inputValue) && inputValue.length >= 9 && inputValue.length <= 13;
+                handleValidation($(this), $("#phoneError"), isValid,
+                    "Must be between 9 and 13 digits and only numbers");
+            });
+
+            // Validate Gender
+            $("#gender").on("change", function() {
+                const inputValue = $(this).val();
+                handleValidation($(this), $("#genderError"), inputValue === "male" || inputValue ===
+                    "female", "Must be male or female");
+            });
+
+            // Validate Country and City
+            function validateText($input, $error) {
+                const inputValue = $input.val();
+                const hasNumber = /\d/.test(inputValue);
+                handleValidation($input, $error, inputValue !== "" && !hasNumber,
+                    "Only Letters and cannot be empty");
+            }
+
+            $("#country, #city").on("keyup", function() {
+                validateText($(this), $("#" + $(this).attr('id') + "Error"));
+            });
+
+            // Validate Address
+            $("#address").on("keyup", function() {
+                const inputValue = $(this).val();
+                handleValidation($(this), $("#addressError"), inputValue !== "", "Address cannot be empty");
+            });
+
+            // Validate Date
+            $("#date").on("input", function() {
+                const inputValue = $(this).val();
+                const isValidDate = !isNaN(new Date(inputValue).getTime());
+                handleValidation($(this), $("#dateError"), isValidDate, "This is not a valid date");
+            });
+
+            // Validate Experience
+            $("#experience").on("keyup", function() {
+                const inputValue = $(this).val();
+                handleValidation($(this), $("#experienceError"), !isNaN(inputValue), "Only Numbers");
+            });
+
+            // Validate Resume (PDF or Word file)
+            $("#resume").on("change", function() {
+                const file = this.files[0];
+                if (file) {
+                    const fileName = file.name.toLowerCase();
+                    const isValidFile = file.type === 'application/pdf' || fileName.endsWith('.pdf') ||
+                        fileName.endsWith('.doc') || fileName.endsWith('.docx');
+                    handleValidation($(this), $("#resumeError"), isValidFile,
+                        "Only PDF or Word Files are allowed");
+                }
+            });
+
+            // Validate Video (less than 2 minutes)
+            $("#video").on("change", function() {
+                const videoFile = this.files[0];
+                if (videoFile) {
+                    const video = document.createElement('video');
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        video.src = e.target.result;
+                        video.addEventListener('loadedmetadata', function() {
+                            handleValidation($("#video"), $("#videoError"), video.duration <=
+                                120, "The video must be less than 2 minutes.");
+                        });
+                    };
+                    reader.readAsDataURL(videoFile);
+                }
+            });
         });
     </script>
 @endsection

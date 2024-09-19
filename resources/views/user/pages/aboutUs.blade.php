@@ -52,7 +52,7 @@
     </header>
 
     {{-- Our expert language --}}
-    <div id="fh5co-explore" class="fh5co-bg-section shadow-lg mb-5" style="background-color: #03144f;">
+    <div id="fh5co-explore" class="fh5co-bg-section shadow-lg mb-5" style="background-color: #198754;">
         <div class="container">
             <div class="text-center text-light">
                 <h4 class="fw-bold text-light">{{__("messages.We are on a mission to develop well-rounded students and prepare all generations for a better future.")}}</h4>
@@ -102,7 +102,7 @@
         <hr>
         <div class="aboutUs flexColumn d-flex justify-content-between grid gap-2 p-3">
             <div class="col column text-center">
-                <video src="{{asset('images/aboutUs.mp4')}}" loop controls autoplay></video>
+                <video src="{{asset('images/aboutUs.mp4')}}" loop controls muted autoplay></video>
             </div>
             <div class="col column">
                 <h3 class="fw-bold">{{__("messages.Key Features of AKM Language Courses")}}</h3>
@@ -133,28 +133,7 @@
             <h5>
                 {{__("messages.Whether you're looking to learn a new language for travel, business, or personal enrichment, AKM Language Courses is here to help you succeed. Join us today and embark on a journey of linguistic discovery and cultural exploration. Let us help you unlock the world of opportunities that fluency in another language can offer.")}}
             </h5>
-            <a href="{{url('contact')}}" class="btn btn-outline-warning btn-lg">{{__("messages.Join Us")}}</a>
+            <a href="{{url('contact')}}" class="btn btn-outline-success btn-lg">{{__("messages.Join Us")}}</a>
         </div>
     </div>
-
-    <script>
-        // change flex-row to flex-column
-        // $(document).ready(function () {
-        //     var windowWidth = $(window).width();
-        //     var about = $(".aboutUs");
-        //     var image = about.find("img");
-        //     var video = about.find("video");
-        //     var div   = about.find("div");
-
-        //     if (windowWidth <= 600) {
-        //         about.addClass("flex-column");
-        //         $(div).removeClass("col-6");
-        //         $(image).removeClass("w-75");
-        //         $(video).css("width","100%");
-        //     } else {
-        //         about.removeClass("flex-column");
-        //     }
-        // });
-    </script>
-
 @endsection

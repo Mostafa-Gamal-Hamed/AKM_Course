@@ -101,38 +101,54 @@ class userController extends Controller
     // Payment
     public function payment(Request $request, string $id)
     {
-        // Check if payment is valid
-        $plan = Plan::findOrFail($id);
-
         // validation
         $request->validate([
             "firstName" => "required|min:3|string",
             "lastName" => "required|min:3|string",
             "email" => "required|email",
-            "number" => "required|numeric|min_digits:9"
+            "number" => "required|numeric|min_digits:9",
+            "type" => "required|in:privet,group,native"
         ]);
 
-        // Fetch currency
-        $ip = request()->ip();
-        $location = Location::get("101.46.192.0");
-        $currency = "USD";
-        if($location->currencyCode == "EGP"){
+        // Check type & id
+        if ($request->type === "privet") {
+            $plan = Plan::findOrFail($id);
+            $type = $plan->name;
+
+            // Fetch currency
+            $ip = request()->ip();
+            $location = Location::get("101.46.192.0");
+            $currency = "USD";
+            if ($location->currencyCode == "EGP") {
+                $currency = "EGP";
+            }
+            if ($location->currencyCode == "AED") {
+                $currency = "AED";
+            }
+            if ($location->currencyCode == "SAR") {
+                $currency = "SR";
+            }
+            if ($location->currencyCode == "KWD") {
+                $currency = "KWD";
+            }
+            if ($location->currencyCode == "QAR") {
+                $currency = "QAR";
+            }
+            if ($location->currencyCode == "BHD") {
+                $currency = "BHD";
+            }
+        }
+
+        // Check if group or native
+        if ($request->type === "group") {
+            $plan = Plan::findOrFail($id);
             $currency = "EGP";
+            $type = $plan->name . "_group";
         }
-        if($location->currencyCode == "AED"){
-            $currency = "AED";
-        }
-        if($location->currencyCode == "SAR"){
-            $currency = "SAR";
-        }
-        if ($location->currencyCode == "KWD") {
-            $currency = "KWD";
-        }
-        if ($location->currencyCode == "QAR") {
-            $currency = "QAR";
-        }
-        if ($location->currencyCode == "BHD") {
-            $currency = "BHD";
+        if ($request->type === "native") {
+            $plan = Plan::findOrFail($id);
+            $currency = "USD";
+            $type = $plan->name . "_native";
         }
 
         // Check if there offerPrice
@@ -140,6 +156,7 @@ class userController extends Controller
             $details = [
                 "productId" => $plan->id,
                 "price" => $plan->offerPrice,
+                "type" => $type,
                 "firstName" => $request->firstName,
                 "lastName" => $request->lastName,
                 "email" => $request->email,
@@ -150,6 +167,7 @@ class userController extends Controller
             $details = [
                 "productId" => $plan->id,
                 "price" => $plan->price,
+                "type" => $type,
                 "firstName" => $request->firstName,
                 "lastName" => $request->lastName,
                 "email" => $request->email,

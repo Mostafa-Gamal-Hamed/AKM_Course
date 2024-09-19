@@ -8,7 +8,7 @@
     {{-- Demo class --}}
     <div class="demo">
         <div class="demo_class" id="demo_class">
-            <a href="{{ url('tryForFree') }}" class="nav-link"
+            <a href="{{ url('tryForFree') }}" class="nav-link popup-vimeo btn-video"
                 id="demo_a">{{ __('messages.! Try Free Class') }}</a>
         </div>
     </div>
@@ -25,7 +25,7 @@
                             <p>
                                 <a class="btn btn-primary btn-lg btn-learn"
                                     href="{{ url('contact') }}">{{ __('messages.Take A Course') }}</a>
-                                <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="{{ url('ourTutors') }}">
+                                <a class="btn btn-primary btn-lg" href="{{ url('becomeTutor') }}">
                                     {{ __('messages.Become a Tutor') }}
                                 </a>
                             </p>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="col-md-12 text-center animate-box">
                     <p><a class="btn btn-primary btn-outline btn-lg btn-learn"
-                            href="{{ url('pricing') }}">{{ __('messages.Our prices') }}</a></p>
+                            href="{{ url('courses') }}">{{ __('messages.Our prices') }}</a></p>
                 </div>
             </div>
         </div>
@@ -180,7 +180,7 @@
                         <div class="owl-carousel owl-carousel-fullwidth">
                             <div class="item">
                                 <div class="testimony-slide active text-center">
-                                    <figure>
+                                    <figure class="d-flex justify-content-center">
                                         <img src="{{ asset('images/testimonial_1.jpg') }}" alt="user">
                                     </figure>
                                     <span>{{ __('messages.Mena Ahmed') }}</span>
@@ -192,7 +192,7 @@
                             </div>
                             <div class="item">
                                 <div class="testimony-slide active text-center">
-                                    <figure>
+                                    <figure class="d-flex justify-content-center">
                                         <img src="{{ asset('images/testimonial_3.jpeg') }}" alt="user">
                                     </figure>
                                     <span>{{ __('messages.Tomas joun') }}</span>
@@ -204,7 +204,7 @@
                             </div>
                             <div class="item">
                                 <div class="testimony-slide active text-center">
-                                    <figure>
+                                    <figure class="d-flex justify-content-center">
                                         <img src="{{ asset('images/testimonial_2.jpg') }}" alt="user">
                                     </figure>
                                     <span>{{ __('messages.Adam Jone') }}</span>

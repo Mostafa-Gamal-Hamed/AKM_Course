@@ -39,7 +39,7 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3 bg-success">
                 {{ __('messages.Login') }}
             </x-primary-button>
         </div>

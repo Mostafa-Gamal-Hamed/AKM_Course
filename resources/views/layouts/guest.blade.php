@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
 
         <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
         <link rel="stylesheet" href="{{asset('build/assets/app-DMMhceos.css')}}">
         <script src="{{asset('build/assets/app-BgvOogpt.js')}}"></script>
     </head>
@@ -23,8 +22,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                    <img src="{{ asset('images/Logo.jpg') }}" style="border-radius:50%;" width="100px" alt="">
+                    <img src="{{ asset('images/akmi.jpeg') }}" style="border-radius:50%;" width="100px" alt="">
                 </a>
             </div>
 

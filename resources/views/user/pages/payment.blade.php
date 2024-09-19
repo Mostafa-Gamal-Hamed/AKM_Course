@@ -9,7 +9,7 @@
     <h1 class="header text-center mt-5 mb-5">Payment</h1>
 
     <div class="container mb-5">
-
+        @json($details)
     </div>
 
     {{-- <div id="fawaterkDivId"></div>
@@ -33,7 +33,7 @@
                     "pendingUrl": "https://dev.fawaterk.com/pending"
                 },
                 "cartItems": [{
-                        "name": "AKM",
+                        "name": "{{ $details['type'] }}",
                         "price": "{{ $details['price'] }}",
                         "quantity": "1"
                     }

@@ -12,7 +12,7 @@
     <meta name="language" content="English">
     <title>@yield('Title')</title>
     {{-- favicon --}}
-    <link rel="shortcut icon" type="image/icon" href="{{ asset('images/favicon-16x16.png') }}" />
+    <link rel="shortcut icon" type="image/icon" href="{{ asset('images/favicon-32x32.png') }}" />
     {{-- Css Links --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/flexslider.css') }}">

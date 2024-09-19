@@ -16,7 +16,7 @@
                     {{-- First Name --}}
                     <div class="col form-floating mb-3">
                         <input type="text" name="firstName" class="form-control" value="{{ old('firstName') }}"
-                            id="firstName" placeholder="First Name" minlength="3" autocomplete="on" required>
+                            id="firstName" placeholder="First Name" minlength="3" autocomplete="on" minlength="3" required>
                         <label for="firstName">{{ __('messages.First Name') }}</label>
                         {{-- Errors Messages start --}}
                         <span id="firstError"></span>
@@ -28,7 +28,7 @@
                     {{-- Last Name --}}
                     <div class="col form-floating mb-3">
                         <input type="text" name="lastName" class="form-control" value="{{ old('lastName') }}"
-                            id="lastName" placeholder="Last Name" minlength="3" autocomplete="on" required>
+                            id="lastName" placeholder="Last Name" minlength="3" autocomplete="on" minlength="3" required>
                         <label for="lastName">{{ __('messages.Last Name') }}</label>
                         {{-- Errors Messages start --}}
                         <span id="lastError"></span>
@@ -64,7 +64,7 @@
                 {{-- Time --}}
                 <div class="form-floating mb-4">
                     <input type="datetime-local" name="dateTime" class="form-control" id="dateTime" required>
-                    <label for="dateTime">{{__("messages.Shoes best time for demo class")}}</label>
+                    <label for="dateTime">{{ __('messages.Shoes best time for demo class') }}</label>
                     {{-- Errors Messages start --}}
                     <span id="dateTimeError"></span>
                     @error('dateTime')
@@ -72,109 +72,110 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">{{ __('messages.Send') }}</button>
+                <button type="submit" class="btn btn-success">{{ __('messages.Send') }}</button>
             </form>
         </div>
     </div>
 
+    {{-- Validation --}}
     <script>
-        // JS
-        const firstName = document.getElementById("firstName");
-        const firstMSG = document.getElementById("firstError");
+        $(document).ready(function() {
+            @if ($errors->any())
+                @foreach ($errors->keys() as $error)
+                    $("input[name='{{ $error }}']").css("border", "2px solid red");
+                    $("textarea[name='{{ $error }}']").css("border", "2px solid red");
+                @endforeach
+            @endif
 
-        const email = document.getElementById("email");
-        const emailMSG = document.getElementById("emailError");
+            // jQuery
+            const firstMSG = $("#firstError");
+            const emailMSG = $("#emailError");
+            const lastMSG = $("#lastError");
+            const numberMSG = $("#numberError");
+            const dateTimeMSG = $("#dateTimeError");
 
-        const lastName = document.getElementById("lastName");
-        const lastMSG = document.getElementById("lastError");
+            // First Name Validation
+            $("#firstName").on("keyup", function() {
+                const inputValue = $(this).val();
+                const regex = /\d/;
 
-        const number = document.getElementById("number");
-        const numberMSG = document.getElementById("numberError");
+                if (regex.test(inputValue)) {
+                    $(this).css("border", "2px solid red");
+                    firstMSG.text("{{ __('messages.Only Letters') }}").css("color", "red");
+                } else if (inputValue.length < 3) {
+                    $(this).css("border", "2px solid red");
+                } else {
+                    $(this).css("border", "2px solid green");
+                    firstMSG.text("");
+                }
+            });
 
-        const dateTime = document.getElementById("dateTime");
-        const dateTimeMSG = document.getElementById("dateTimeError");
+            // Last Name Validation
+            $("#lastName").on("keyup", function() {
+                const inputValue = $(this).val();
+                const regex = /\d/;
 
-        //// Validation
+                if (regex.test(inputValue)) {
+                    $(this).css("border", "2px solid red");
+                    lastMSG.text("{{ __('messages.Only Letters') }}").css("color", "red");
+                } else if (inputValue.length < 3) {
+                    $(this).css("border", "2px solid red");
+                } else {
+                    $(this).css("border", "2px solid green");
+                    lastMSG.text("");
+                }
+            });
 
-        firstName.addEventListener("keyup", function() {
-            const inputValue = firstName.value;
-            const regex = /\d/;
+            // Email Validation
+            $("#email").on("keyup", function() {
+                const inputValue = $(this).val();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            // Check if has less than 3 char or has a number
-            if (regex.test(inputValue)) {
-                firstName.style.border = "2px solid red";
-                firstMSG.innerHTML = "Only Letters";
-                firstMSG.style.color = "red";
-            } else if (inputValue.length < 3) {
-                firstName.style.border = "2px solid red";
-            } else {
-                firstName.style.border = "2px solid green";
-                firstMSG.innerHTML = "";
+                if (inputValue === "") {
+                    $(this).css("border", "2px solid red");
+                    emailMSG.text("{{ __('messages.Email cannot be empty') }}").css("color", "red");
+                } else if (!emailPattern.test(inputValue)) {
+                    $(this).css("border", "2px solid red");
+                    emailMSG.text("{{ __('messages.Invalid email format') }}").css("color", "red");
+                } else {
+                    $(this).css("border", "2px solid green");
+                    emailMSG.text("");
+                }
+            });
+
+            // Phone Number Validation
+            $("#number").on("keyup", function() {
+                const inputValue = $(this).val();
+
+                if (isNaN(inputValue)) {
+                    $(this).css("border", "2px solid red");
+                    numberMSG.text("{{ __('messages.Only Numbers') }}").css("color", "red");
+                } else if (inputValue.length < 9 || inputValue.length > 13) {
+                    $(this).css("border", "2px solid red");
+                    numberMSG.text("{{ __('messages.Must be 9-13 digits') }}").css("color", "red");
+                } else {
+                    $(this).css("border", "2px solid green");
+                    numberMSG.text("");
+                }
+            });
+
+            // Date and Time Validation
+            $("#dateTime").on("input", function() {
+                const inputValue = $(this).val();
+
+                if (isValidDate(inputValue)) {
+                    $(this).css("border", "2px solid green");
+                    dateTimeMSG.text("");
+                } else {
+                    $(this).css("border", "2px solid red");
+                    dateTimeMSG.text("{{__('messages.This is not a valid date and time')}}").css("color", "red");
+                }
+            });
+
+            function isValidDate(dateString) {
+                const dateTime = new Date(dateString);
+                return !isNaN(dateTime.getTime());
             }
         });
-
-        lastName.addEventListener("keyup", function() {
-            const inputValue = lastName.value;
-            const regex = /\d/;
-
-            // Check if has less than 3 char or has a number
-            if (regex.test(inputValue)) {
-                lastName.style.border = "2px solid red";
-                lastMSG.innerHTML = "Only Letters";
-                lastMSG.style.color = "red";
-            } else if (inputValue.length < 3) {
-                lastName.style.border = "2px solid red";
-            } else {
-                lastName.style.border = "2px solid green";
-                lastMSG.innerHTML = "";
-            }
-        });
-
-        email.addEventListener("keyup", function() {
-            const inputValue = email.value;
-            const regex = /\d/;
-
-            // Check if has less than 3 char or has a number
-            if (inputValue == "") {
-                email.style.border = "2px solid red";
-                emailMSG.innerHTML = "Empty";
-                emailMSG.style.color = "red";
-            } else {
-                email.style.border = "2px solid green";
-                emailMSG.innerHTML = "";
-            }
-        });
-
-        number.addEventListener("keyup", function() {
-            const inputValue = number.value;
-            if (isNaN(inputValue)) {
-                number.style.border = "2px solid red";
-                numberMSG.innerHTML = "Only Numbers";
-                numberMSG.style.color = "red";
-            } else if (inputValue.length < 9 || inputValue.length > 13) {
-                number.style.border = "2px solid red";
-                numberMSG.innerHTML = "must be 9 or 13 numbers";
-                numberMSG.style.color = "red";
-            } else {
-                number.style.border = "2px solid green";
-                numberMSG.innerHTML = "";
-            }
-        });
-
-        dateTime.addEventListener("input", function() {
-            const inputValue = dateTime.value;
-            if (isValidDate(inputValue)) {
-                dateTime.style.border = "2px solid green";
-                dateTimeMSG.innerHTML = "";
-            } else {
-                dateTime.style.border = "2px solid red";
-                dateTimeMSG.textContent = "This is not a valid date and time";
-                dateTimeMSG.style.color = "red";
-            }
-        });
-        function isValidDate(dateString) {
-            let dateTime = new Date(dateString);
-            return !isNaN(dateTime.getTime());
-        }
     </script>
 @endsection

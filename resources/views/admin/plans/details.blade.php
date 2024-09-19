@@ -1,20 +1,21 @@
 @extends('admin.layout')
 
 @section('Title')
-    {{$plan->name}} Details
+    {{ $plan->name }} Details
 @endsection
 
 @section('Body')
-    <h3 class="text-dark text-center font-weight-bold mb-5">{{$plan->name}} Details</h3>
+    <h3 class="text-dark text-center font-weight-bold mb-5">{{ $plan->name }} Details</h3>
     <div class="container mb-5">
         <div class="shadow p-3">
-            <form action="{{ route('updatePlan',"$plan->id") }}" method="post">
+            <form action="{{ route('updatePlan', "$plan->id") }}" method="post">
                 @csrf
-                @method("PUT")
+                @method('PUT')
                 {{-- Name --}}
                 <div class="mb-3">
                     <label for="name">Name</label>
-                    <input type="text" name="name" value="{{ $plan->name }}" class="form-control" id="name">
+                    <input type="text" name="name" value="{{ $plan->name }}" class="form-control" id="name"
+                        minlength="3" required>
                     {{-- Errors Messages start --}}
                     <span id="nameError"></span>
                     @error('name')
@@ -36,7 +37,7 @@
                 {{-- Country name --}}
                 <div class="mb-3">
                     <label for="countryName">Country name</label>
-                    <select name="countryName" class="custom-select" id="countryName">
+                    <select name="countryName" class="custom-select" id="countryName" required>
                         <option value="{{ $plan->countryName }}" hidden>{{ $plan->countryName }}</option>
                         <option value="Egypt">Egypt</option>
                         <option value="United Arab Emirates">United Arab Emirates</option>
@@ -45,6 +46,7 @@
                         <option value="Qatar">Qatar</option>
                         <option value="Bahrain">Bahrain</option>
                         <option value="Other">Other</option>
+                        <option value="">Empty</option>
                     </select>
                     {{-- Errors Messages start --}}
                     <span id="countryError"></span>
@@ -56,8 +58,8 @@
                 {{-- Price --}}
                 <div class="mb-3">
                     <label for="price">The Price</label>
-                    <input type="number" name="price" value="{{ $plan->price }}" id="price"
-                        class="form-control">
+                    <input type="number" name="price" value="{{ $plan->price }}" id="price" class="form-control"
+                        required>
                     {{-- Errors Messages start --}}
                     <span id="priceError"></span>
                     @error('price')
@@ -80,8 +82,8 @@
                 {{-- Month --}}
                 <div class="mb-3">
                     <label for="month">The Month</label>
-                    <input type="number" name="month" value="{{ $plan->month }}" id="month"
-                        class="form-control">
+                    <input type="number" name="month" value="{{ $plan->month }}" id="month" class="form-control"
+                        max="12" required>
                     {{-- Errors Messages start --}}
                     <span id="monthError"></span>
                     @error('month')
@@ -92,8 +94,8 @@
                 {{-- Sessions --}}
                 <div class="mb-3">
                     <label for="sessions">Sessions</label>
-                    <input type="number" name="sessions" value="{{ $plan->sessions }}" id="sessions"
-                        class="form-control">
+                    <input type="number" name="sessions" value="{{ $plan->sessions }}" id="sessions" class="form-control"
+                        max="80" required>
                     {{-- Errors Messages start --}}
                     <span id="sessionsError"></span>
                     @error('sessions')
@@ -104,10 +106,11 @@
                 {{-- Type --}}
                 <div class="mb-3">
                     <label for="type">Type</label>
-                    <select name="type" class="custom-select" id="type">
-                        <option value="{{$plan->type}}" hidden>{{$plan->type}}</option>
-                        <option value="online session">online session</option>
-                        <option value="offline session">offline session</option>
+                    <select name="type" class="custom-select" id="type" required>
+                        <option value="{{ $plan->type }}" hidden>{{ ucfirst($plan->type) }}</option>
+                        <option value="privet">Privet</option>
+                        <option value="group">Group</option>
+                        <option value="native">Native</option>
                     </select>
                     {{-- Errors Messages start --}}
                     <span id="typeError"></span>
@@ -125,187 +128,170 @@
         </div>
     </div>
 
+    {{-- Validation --}}
     <script>
-        // Catch
-        var planName  = document.getElementById("name");
-        var nameError = document.getElementById("nameError");
+        $(document).ready(function() {
+            @if ($errors->any())
+                @foreach ($errors->keys() as $error)
+                    $("input[name='{{ $error }}']").css("border", "2px solid red");
+                    $("select[name='{{ $error }}']").css("border", "2px solid red");
+                @endforeach
+            @endif
+            // Catch elements
+            var $planName = $('#name');
+            var $nameError = $('#nameError');
 
-        var comment = document.getElementById("comment");
-        var commentError = document.getElementById("commentError");
+            var $comment = $('#comment');
+            var $commentError = $('#commentError');
 
-        var country = document.getElementById("countryName");
-        var countryError = document.getElementById("countryNameError");
+            var $country = $('#countryName');
+            var $countryError = $('#countryNameError');
 
-        var price = document.getElementById("price");
-        var priceError = document.getElementById("priceError");
+            var $price = $('#price');
+            var $priceError = $('#priceError');
 
-        var offerPrice = document.getElementById("offerPrice");
-        var offerPriceError = document.getElementById("offerPriceError");
+            var $offerPrice = $('#offerPrice');
+            var $offerPriceError = $('#offerPriceError');
 
-        var month = document.getElementById("month");
-        var monthError = document.getElementById("monthError");
+            var $month = $('#month');
+            var $monthError = $('#monthError');
 
-        var sessions = document.getElementById("sessions");
-        var sessionsError = document.getElementById("sessionsError");
+            var $sessions = $('#sessions');
+            var $sessionsError = $('#sessionsError');
 
-        var type = document.getElementById("type");
-        var typeError = document.getElementById("typeError");
+            var $type = $('#type');
+            var $typeError = $('#typeError');
 
-        var all = document.getElementsByTagName("input");
-        var button = document.getElementById("button");
-        var buttonError = document.getElementById("buttonError");
+            // Name Validation
+            $planName.on('keyup', function() {
+                var inputValue = $(this).val();
+                var regex = /\d/;
 
-        // Name
-        planName.addEventListener("keyup", function() {
-            const inputValue = planName.value;
-            const regex = /\d/;
-
-            if (inputValue === "") {
-                planName.style.border = "2px solid red";
-                nameError.innerHTML = "Empty";
-                nameError.style.color = "red";
-            } else if (regex.test(inputValue)) {
-                planName.style.border = "2px solid red";
-                nameError.innerHTML = "Only Letters";
-                nameError.style.color = "red";
-            } else if (inputValue.length < 3) {
-                planName.style.border = "2px solid red";
-                nameError.innerHTML = "Name must be more than 3 characters";
-                nameError.style.color = "red";
-            } else {
-                planName.style.border = "2px solid green";
-                nameError.innerHTML = "";
-            }
-        });
-
-        // comment
-        comment.addEventListener("keyup", function() {
-            const inputValue = comment.value;
-
-            comment.style.border = "2px solid green";
-            commentError.innerHTML = "";
-        });
-
-        // country
-        country.addEventListener("change", function() {
-            const inputValue = country.value;
-
-            country.style.border = "2px solid green";
-            countryError.innerHTML = "";
-            buttonError.innerHTML = "";
-            button.style.display = "block";
-        });
-
-        // price
-        price.addEventListener("keyup", function() {
-            const inputValue = price.value;
-
-            if (inputValue === "") {
-                price.style.border = "2px solid red";
-                priceError.innerHTML = "Empty";
-                priceError.style.color = "red";
-            } else if (isNaN(inputValue)) {
-                price.style.border = "2px solid red";
-                priceError.innerHTML = "Only Numbers";
-                priceError.style.color = "red";
-            } else {
-                price.style.border = "2px solid green";
-                priceError.innerHTML = "";
-            }
-        });
-
-        // offerPrice
-        offerPrice.addEventListener("keyup", function() {
-            const inputValue = offerPrice.value;
-
-            if (isNaN(inputValue)) {
-                offerPrice.style.border = "2px solid red";
-                offerPriceError.innerHTML = "Only Numbers";
-                offerPriceError.style.color = "red";
-            } else {
-                offerPrice.style.border = "2px solid green";
-                offerPriceError.innerHTML = "";
-            }
-        });
-
-        // month
-        month.addEventListener("keyup", function() {
-            const inputValue = month.value;
-
-            if (inputValue === "") {
-                month.style.border = "2px solid red";
-                monthError.innerHTML = "Empty";
-                monthError.style.color = "red";
-            } else if (isNaN(inputValue)) {
-                month.style.border = "2px solid red";
-                monthError.innerHTML = "Only Numbers";
-                monthError.style.color = "red";
-            } else {
-                month.style.border = "2px solid green";
-                monthError.innerHTML = "";
-            }
-        });
-
-        // sessions
-        sessions.addEventListener("keyup", function() {
-            const inputValue = sessions.value;
-
-            if (inputValue === "") {
-                sessions.style.border = "2px solid red";
-                sessionsError.innerHTML = "Empty";
-                sessionsError.style.color = "red";
-            } else if (isNaN(inputValue)) {
-                sessions.style.border = "2px solid red";
-                sessionsError.innerHTML = "Only Numbers";
-                sessionsError.style.color = "red";
-            } else {
-                sessions.style.border = "2px solid green";
-                sessionsError.innerHTML = "";
-            }
-        });
-
-        // type
-        type.addEventListener("change", function() {
-            const inputValue = type.value;
-
-            // Check if not a male or female
-            if (inputValue === "") {
-                type.style.border = "2px solid red";
-                typeError.innerHTML = "Empty";
-                typeError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Something is wrong";
-                buttonError.style.color = "red";
-            } else if (inputValue != "online session" && inputValue != "offline session") {
-                type.style.border = "2px solid red";
-                typeError.innerHTML = "It must be online or offline session only";
-                typeError.style.color = "red";
-                button.style.display = "none";
-                buttonError.innerHTML = "Something is wrong";
-                buttonError.style.color = "red";
-            } else {
-                type.style.border = "2px solid green";
-                typeError.innerHTML = "";
-                buttonError.innerHTML = "";
-                button.style.display = "block";
-            }
-        });
-
-        // Button
-        for (let j = 0; j < all.length; j++) {
-            all[j].addEventListener("keyup", function() {
-                for (let i = 0; i < all.length; i++) {
-                    if (all[i].style.border === "2px solid red") {
-                        button.style.display = "none";
-                        buttonError.innerHTML = "Something is wrong";
-                        buttonError.style.color = "red";
-                        break;
-                    } else {
-                        buttonError.innerHTML = "";
-                        button.style.display = "block";
-                    }
+                if (inputValue === "") {
+                    $planName.css('border', '2px solid red');
+                    $nameError.text("Empty").css('color', 'red');
+                } else if (regex.test(inputValue)) {
+                    $planName.css('border', '2px solid red');
+                    $nameError.text("Only Letters").css('color', 'red');
+                } else if (inputValue.length < 3) {
+                    $planName.css('border', '2px solid red');
+                    $nameError.text("Name must be more than 3 characters").css('color', 'red');
+                } else {
+                    $planName.css('border', '2px solid green');
+                    $nameError.text("");
                 }
             });
-        }
+
+            // Comment Validation (optional)
+            $comment.on('keyup', function() {
+                $(this).css('border', '2px solid green');
+                $commentError.text("");
+            });
+
+            // Country Validation
+            var allowedCountries = [
+                "Egypt",
+                "United Arab Emirates",
+                "Saudi Arabia",
+                "Kuwait",
+                "Qatar",
+                "Bahrain",
+                "Other",
+                ""
+            ];
+            $country.on('change', function() {
+                var inputValue = $(this).val();
+
+                if (allowedCountries.includes(inputValue)) {
+                    $(this).css('border', '2px solid green');
+                    $countryError.text("");
+                    $button.show();
+                    $buttonError.text("");
+                } else {
+                    $(this).css('border', '2px solid red');
+                    $countryError.text("Invalid country selection").css('color', 'red');
+                    $button.hide();
+                    $buttonError.text("Please select a valid country").css('color', 'red');
+                }
+            });
+
+            // Price Validation
+            $price.on('keyup', function() {
+                var inputValue = $(this).val();
+
+                if (inputValue === "") {
+                    $price.css('border', '2px solid red');
+                    $priceError.text("Empty").css('color', 'red');
+                } else if (isNaN(inputValue)) {
+                    $price.css('border', '2px solid red');
+                    $priceError.text("Only Numbers").css('color', 'red');
+                } else {
+                    $price.css('border', '2px solid green');
+                    $priceError.text("");
+                }
+            });
+
+            // Offer Price Validation
+            $offerPrice.on('keyup', function() {
+                var inputValue = $(this).val();
+
+                if (isNaN(inputValue)) {
+                    $offerPrice.css('border', '2px solid red');
+                    $offerPriceError.text("Only Numbers").css('color', 'red');
+                } else {
+                    $offerPrice.css('border', '2px solid green');
+                    $offerPriceError.text("");
+                }
+            });
+
+            // Month Validation
+            $month.on('keyup', function() {
+                var inputValue = $(this).val();
+
+                if (inputValue === "") {
+                    $month.css('border', '2px solid red');
+                    $monthError.text("Empty").css('color', 'red');
+                } else if (isNaN(inputValue)) {
+                    $month.css('border', '2px solid red');
+                    $monthError.text("Only Numbers").css('color', 'red');
+                } else {
+                    $month.css('border', '2px solid green');
+                    $monthError.text("");
+                }
+            });
+
+            // Sessions Validation
+            $sessions.on('keyup', function() {
+                var inputValue = $(this).val();
+
+                if (inputValue === "") {
+                    $sessions.css('border', '2px solid red');
+                    $sessionsError.text("Empty").css('color', 'red');
+                } else if (isNaN(inputValue)) {
+                    $sessions.css('border', '2px solid red');
+                    $sessionsError.text("Only Numbers").css('color', 'red');
+                } else {
+                    $sessions.css('border', '2px solid green');
+                    $sessionsError.text("");
+                }
+            });
+
+            // Type Validation
+            $type.on('change', function() {
+                var inputValue = $(this).val();
+
+                if (inputValue === "") {
+                    $type.css('border', '2px solid red');
+                    $typeError.text("Empty").css('color', 'red');
+                    $button.hide();
+                    $buttonError.text("Something is wrong").css('color', 'red');
+                } else {
+                    $type.css('border', '2px solid green');
+                    $typeError.text("");
+                    $button.show();
+                    $buttonError.text("");
+                }
+            });
+        });
     </script>
 @endsection

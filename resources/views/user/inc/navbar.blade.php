@@ -1,7 +1,7 @@
 {{-- Nav bar --}}
-<nav class="navbar navbar-expand-lg bg-dark animate__animated animate__fadeInDown animate__slow">
+<nav class="navbar navbar-expand-lg bg-success animate__animated animate__fadeInDown animate__slow">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-white" href="{{ url('/') }}">AKM<span style="color: #ea9215;">.</span></a>
+        <a class="navbar-brand fw-bold text-white" href="{{ url('/') }}">AKM<span style="color: black;">.</span></a>
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -15,9 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{{ url('ourTutors') }}">{{__("messages.Our Tutors")}}</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link text-light" href="{{ url('pricing') }}">{{__("messages.Pricing")}}</a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a class="nav-link text-light" href="{{ url('blog') }}">{{__("messages.Blog")}}</a>
                 </li> --}}

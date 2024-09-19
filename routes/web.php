@@ -247,14 +247,16 @@ Route::controller(pagesController::class)->group(function () {
     Route::get('courses', 'courses');
     Route::get('ourTutors', 'ourTutors');
     // Route::get('blog', 'blog');
-    Route::get('pricing','pricing');
+    // Route::get('pricing','pricing');
+    Route::get('tutorType','tutorType');
+    Route::get('nativeTutor','nativeTutor');
     Route::get('pricingDetails','pricingDetails');
     Route::get('buyPlan','buyPlan');
     Route::get('showBlog/{id}', 'showBlog');
     Route::get('aboutUs', 'aboutUs');
     Route::get('contact', 'contact');
     Route::get('becomeTutor', 'becomeTutor');
-    Route::get('checkout/{id}', 'checkout');
+    Route::get('checkout/{id}/{tutorType}', 'checkout');
     Route::get('callback', 'callback');
 });
 

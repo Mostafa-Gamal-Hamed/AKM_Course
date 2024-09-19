@@ -29,6 +29,7 @@
     <div class="move-bar" id="movingBar">
         <span>
             {{__("messages.Welcome To AKM Language Courses The Best Online Courses Ever We are with you until you reach professionalism")}}
+            {{-- {{__("messages.Welcome To AKM Language Courses.")}} <a href="{{ url('pricing') }}" class="text-warning">{{__("messages.Now 50% discount on all courses. Catch the offer now")}}</a> --}}
         </span>
     </div>
 </div>
@@ -51,8 +52,8 @@
                 </ul>
             </div>
 
-            <div class="col-md-2 mb-3">
-                <h4 class="text-center">{{__("messages.Learn")}} &amp; {{__("messages.Grow")}}</h4>
+            <div class="col-md-2 text-center mb-3">
+                <h4>{{__("messages.Learn")}} &amp; {{__("messages.Grow")}}</h4>
                 <ul class="fh5co-footer-links">
                     <li><a href="{{ url('blog') }}">{{__("messages.Blog")}}</a></li>
                     <li><a href="#">{{__("messages.Privacy")}}</a></li>
@@ -61,7 +62,7 @@
             </div>
 
             <div class="col-md-5 text-center">
-                <img src="{{ asset('images/Logo.jpg') }}" class="img-fluid" width="300px" alt="AKM Courses">
+                <img src="{{ asset('images/Logoo.png') }}" class="img-fluid" width="300px" alt="AKM Courses">
             </div>
 
         </div>

@@ -29,18 +29,14 @@ class PlanController extends Controller
         // Validation
         $request->validate([
             "name"=>"required|string|min:3",
-            "countryName"=>"required|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
+            "comment"=>"nullable|string",
+            "countryName"=>"nullable|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
             "price"=>"required|numeric",
+            "offerPrice"=>"nullable|numeric",
             "month"=>"required|numeric",
             "sessions"=>"required|numeric",
-            "type"=>"required|in:online session,offline session"
+            "type"=>"required|in:privet,group,native"
         ]);
-        if($request->get("comment")) {
-            $request->validate(["comment"=>"string"]);
-        }
-        if($request->get("offerPrice")) {
-            $request->validate(["offerPrice"=>"numeric"]);
-        }
 
         // Insert data
         Plan::create([
@@ -65,18 +61,14 @@ class PlanController extends Controller
         // Validation
         $request->validate([
             "name"=>"required|string|min:3",
-            "countryName"=>"required|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
+            "comment"=>"nullable|string",
+            "countryName"=>"nullable|in:Egypt,United Arab Emirates,Saudi Arabia,Kuwait,Qatar,Bahrain,Other",
             "price"=>"required|numeric",
+            "offerPrice"=>"nullable|numeric",
             "month"=>"required|numeric",
             "sessions"=>"required|numeric",
-            "type"=>"required|in:online session,offline session"
+            "type"=>"required|in:privet,group,native"
         ]);
-        if($request->get("comment")) {
-            $request->validate(["comment"=>"string"]);
-        }
-        if($request->get("offerPrice")) {
-            $request->validate(["offerPrice"=>"numeric"]);
-        }
 
         $plan->update([
             "name"=>$request->name,

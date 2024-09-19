@@ -64,6 +64,7 @@ return [
     "Demo class"=>"Demo class",
     "Shoes best time for demo class"=>"Shoes best time for demo class",
     "Send"=>"Send",
+    "This is not a valid date and time"=>"This is not a valid date and time",
 
     // Courses page
     "Stand Out In Your Field"=>"Stand Out In Your Field",
@@ -157,14 +158,34 @@ return [
     "Coming soon"=>"Coming soon",
     "All sessions are private"=>"All sessions are private",
     "one to one"=>"one to one",
+    "privet"=>"privet",
+    "native"=>"native",
+    "group"=>"group",
+    "The group starts with 4 people"=>"The group starts with 4 people",
 
-    // Checkout
+    // nativeTutor page
+    "Native tutor"=>"Native tutor",
+    "Tutor type"=>"Tutor type",
+    "English tutors"=>"English tutors",
+    "Native english tutors"=>"Native english tutors",
+    "$"=>"$",
+
+    // Checkout page
     "checkout"=>"checkout",
     "Your Plan"=>"Your Plan",
     "Billing details"=>"Billing details",
     "continue"=>"continue",
+    "type"=>"type",
+    "Email cannot be empty"=>"Email cannot be empty",
+    "Invalid email format"=>"Invalid email format",
+    "Only Letters"=>"Only Letters",
+    "Must be at least 3 characters"=>"Must be at least 3 characters",
+    "Only Numbers"=>"Only Numbers",
+    "Must be 9-13 digits"=>"Must be 9-13 digits",
+    "This field cannot be empty"=>"This field cannot be empty",
+    "Error"=>"Error",
 
-    // About us
+    // About us page
     "We are on a mission to develop well-rounded students and prepare all generations for a better future."=>"We are on a mission to develop well-rounded students and prepare all generations for a better future.",
     "We help you gain confidence and improve your speaking, pronunciation and vocabulary."=>"We help you gain confidence and improve your speaking, pronunciation and vocabulary.",
     "About AKM Language Courses"=>"About AKM Language Courses",
@@ -238,4 +259,6 @@ return [
     "Copyright 2024 - All rights reserved." => "Copyright 2024 - All rights reserved.",
     "Mobile" => "Mobile",
     "Welcome To AKM Language Courses The Best Online Courses Ever We are with you until you reach professionalism"=>"Welcome To AKM Language Courses The Best Online Courses Ever We are with you until you reach professionalism",
+    "Welcome To AKM Language Courses."=>"Welcome To AKM Language Courses.",
+    "Now 50% discount on all courses. Catch the offer now"=>"Now 50% discount on all courses. Catch the offer now",
 ];
